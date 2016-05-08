@@ -1,6 +1,6 @@
 # Wikitablescrape
 
-Scrape all tables from a Wikipedia article into CSV files on your computer.
+## Scrape all tables from a Wikipedia article into CSV files on your computer.
 
 To run the script, you must have [Python3][python] and the [Beautiful Soup][beautiful-soup] package installed. You can install Beautiful Soup from pip using `pip install bs4`.
 
