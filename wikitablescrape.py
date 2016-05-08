@@ -4,22 +4,22 @@ import os
 import requests
 from bs4 import BeautifulSoup
 
-OUTPUT_NAME = "mountains"
 WIKI_URL = "https://en.wikipedia.org/wiki/List_of_mountains_by_elevation"
+OUTPUT_NAME = "mountains"
 
 
-def scrape():
+def scrape(url, output_name):
     """Create CSVs from all tables in a Wikipedia article."""
 
     # Read tables from Wikipedia article into list of HTML strings
-    req = requests.get(WIKI_URL)
+    req = requests.get(url)
     soup = BeautifulSoup(req.content, 'lxml')
     table_classes = {"class": ["sortable", "plainrowheaders"]}
     wikitables = soup.findAll("table", table_classes)
 
     # Create folder for output if it doesn't exist
     try:
-        os.mkdir(OUTPUT_NAME)
+        os.mkdir(output_name)
     except Exception:
         # Generic OS Error
         pass
@@ -27,11 +27,11 @@ def scrape():
     for index, table in enumerate(wikitables):
         # Make a unique file name for each CSV
         if index == 0:
-            filename = OUTPUT_NAME
+            filename = output_name
         else:
-            filename = OUTPUT_NAME + '_' + str(index)
+            filename = output_name + '_' + str(index)
 
-        filepath = os.path.join(OUTPUT_NAME, filename) + '.csv'
+        filepath = os.path.join(output_name, filename) + '.csv'
 
         with open(filepath, 'w') as output:
             write_html_table_to_csv(table, output)
@@ -113,4 +113,4 @@ def clean_data(row):
 
 
 if __name__ == '__main__':
-    scrape()
+    scrape(WIKI_URL, OUTPUT_NAME)

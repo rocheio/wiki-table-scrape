@@ -6,7 +6,7 @@ To run the script, you must have [Python3][python] and the [Beautiful Soup][beau
 
 Replace the values of `OUTPUT_NAME` and `WIKI_URL` at the top of the script with the values you want. All large tables from the article at `WIKI_URL` will be downloaded to multiple CSV files in a folder named `OUTPUT_NAME` in the same directory as your script.
 
-The script won't give you 100% clean data for every page on Wikipedia, but it will get you most of the way there and handle the three topics I mention in [my blog post][blog-post]. You can see the output from the pages for [mountain height][wiki-mountains], [volcano height][wiki-volcano] [NBA scores][wiki-nba], and [the highest-grossing films][wiki-films] in the `output` folder.
+The script won't give you 100% clean data for every page on Wikipedia, but it will get you most of the way there and handle the three topics I mention in [my blog post][blog-post]. You can see the output from the pages for [mountain height][wiki-mountains], [volcano height][wiki-volcano], [NBA scores][wiki-nba], and [the highest-grossing films][wiki-films] in the `output` folder.
 
 Please open an Issue or Pull Request if you find a bug or have suggestions for improvement.
 
