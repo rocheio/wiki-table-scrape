@@ -99,8 +99,10 @@ def clean_data(row):
         no_footnotes = [text for text in text_items if text[0] != '[']
         puretext = ''.join(no_footnotes)
 
-        # Replace non-breaking spaces with regular spaces and add quotes
+        # Replace non-breaking spaces with regular spaces
         puretext = puretext.replace('\xa0', ' ')
+        # Escape double quotes for CSV, then surround with double quotes
+        puretext = puretext.replace('"', '""')
         quoted = '"' + puretext + '"'
 
         cleaned_cells += [quoted]
