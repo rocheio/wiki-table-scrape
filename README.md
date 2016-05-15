@@ -11,7 +11,7 @@ The script won't give you 100% clean data for every page on Wikipedia, but it wi
 Please open an Issue or Pull Request if you find a bug or have suggestions for improvement.
 
 [beautiful-soup]: https://www.crummy.com/software/BeautifulSoup/
-[blog-post]: https://roche.io/data/2016/05/08/scrape-wikipedia-with-python.html
+[blog-post]: https://roche.io/2016/05/08/scrape-wikipedia-with-python
 [python]: https://www.python.org/downloads/
 [wiki-films]: https://en.wikipedia.org/wiki/List_of_highest-grossing_films
 [wiki-mountains]: https://en.wikipedia.org/wiki/List_of_mountains_by_elevation
