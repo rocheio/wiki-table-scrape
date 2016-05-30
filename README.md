@@ -1,15 +1,15 @@
 # wiki-table-scrape
 
-#### Scrape all the tables from a Wikipedia article into a folder of CSV files.
+Scrape all the tables from a Wikipedia article into a folder of CSV files.
 
-## Installation instructions
+## Installation
 
-This is a standalone [Python 3][python] module that depends on the [Beautiful Soup][beautiful-soup] and [requests][requests] packages.
+This is a [Python 3.5][python] module that depends on the [Beautiful Soup][beautiful-soup] and [requests][requests] packages.
 
 1. Clone and `cd` into this repo.
-2. Install [Python 3][python].
+2. Install [Python 3.5][python].
 3. Install requirements from pip with `pip install -r requirements.txt`.
-4. If on Windows, download the [`lxml`][lxml] parser `.whl` and install it.
+4. If on Windows, download the  `.whl` for the [`lxml`][lxml] parser and install it locally.
 5. Test the program by running `python test_wikitablescrape.py`.
 
 ## Usage
@@ -27,7 +27,7 @@ wikitablescrape.scrape(
 
 Inspecting the output with Bash gives the following results:
 
-```bash
+```text
 $ ls films/
 films.csv  films_1.csv  films_2.csv  films_3.csv
 
@@ -47,8 +47,7 @@ $ cat films/films_1.csv
 
 ## Disclaimers
 
-The script won't give you 100% clean data for every page on Wikipedia, but it will get you most of the way there.
-You can see the output from the pages for [mountain height][wiki-mountains], [volcano height][wiki-volcano], [NBA scores][wiki-nba], and [the highest-grossing films][wiki-films] in the `output` folder of this repo.
+The script won't give you 100% clean data for every page on Wikipedia, but it will get you most of the way there. You can see the output from the pages for [mountain height][wiki-mountains], [volcano height][wiki-volcano], [NBA scores][wiki-nba], and [the highest-grossing films][wiki-films] in the `output` folder of this repo.
 
 I only plan to add features to this module as I need them, but if you would like to contribute, please open an issue or pull request.
 
