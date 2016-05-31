@@ -1,167 +1,51 @@
-"Rank", "Player", "Position(s)", "Team(s) played for (years)", "Total points", "Games
-played", "Points
-per game
-average", "Field goals
-made", "Three-point
-field goals
-made", "Free
-throws
-made"
-"1", "Kareem Abdul-Jabbar*", "C", "Milwaukee Bucks (1969–1975)
-Los Angeles Lakers (1975–1989)", "38,387", "1,560", "24.6", "15,836", "1", "6,712"
-"2", "Karl Malone*", "PF", "Utah Jazz (1985–2003)
-Los Angeles Lakers (2003–2004)", "36,928", "1,476", "25.0", "13,528", "85", "9,787"
-"3", "Kobe Bryant†", "SG", "Los Angeles Lakers (1996–2016)", "33,643", "1,346", "25.0", "11,719", "1,827", "8,378"
-"4", "Michael Jordan*", "SG", "Chicago Bulls (1984–1993; 1995–1998)
-Washington Wizards (2001–2003)", "32,292", "1,072", "30.1", "12,192", "581", "7,327"
-"5", "Wilt Chamberlain*", "C", "Philadelphia/San Francisco Warriors (1959–1965)
-Philadelphia 76ers (1965–1968)
-Los Angeles Lakers (1968–1973)", "31,419", "1,045", "30.1", "12,681", "0", "6,057"
-"6", "Dirk Nowitzki^", "PF", "Dallas Mavericks (1998–present)", "29,491", "1,340", "22.0", "10,392", "1,701", "7,006"
-"7", "Shaquille O'Neal*", "C", "Orlando Magic (1992–1996)
-Los Angeles Lakers (1996–2004)
-Miami Heat (2004–2008)
-Phoenix Suns (2008–2009)
-Cleveland Cavaliers (2009–2010)
-Boston Celtics (2010–2011)", "28,596", "1,207", "23.7", "11,330", "1", "5,935"
-"8", "Moses Malone*", "C", "Buffalo Braves (1976)
-Houston Rockets (1976–1982)
-Philadelphia 76ers (1982–1986; 1993–1994)
-Washington Bullets (1986–1988)
-Atlanta Hawks (1988–1991)
-Milwaukee Bucks (1991–1993)
-San Antonio Spurs (1994–1995)", "27,409", "1,329", "20.6", "9,435", "8", "8,531"
-"9", "Elvin Hayes*", "PF", "San Diego/Houston Rockets (1968–1972; 1981–1984)
-Baltimore/Capital/Washington Bullets (1972–1981)", "27,313", "1,303", "21.0", "10,976", "5", "5,356"
-"10", "Hakeem Olajuwon*", "C", "Houston Rockets (1984–2001)
-Toronto Raptors (2001–2002)", "26,946", "1,238", "21.8", "10,749", "25", "5,423"
-"11", "LeBron James^", "SF", "Cleveland Cavaliers (2003–2010; 2014–present)
-Miami Heat (2010–2014)", "26,833", "987", "27.2", "9,687", "1,343", "6,116"
-"12", "Oscar Robertson*", "PG", "Cincinnati Royals (1960–1970)
-Milwaukee Bucks (1970–1974)", "26,710", "1,040", "25.7", "9,508", "0", "7,694"
-"13", "Dominique Wilkins*", "SF", "Atlanta Hawks (1982–1994)
-Los Angeles Clippers (1994)
-Boston Celtics (1994–1995)
-San Antonio Spurs (1996–1997)
-Orlando Magic (1999)", "26,668", "1,074", "24.8", "9,963", "711", "6,031"
-"14", "Tim Duncan^", "PF/C", "San Antonio Spurs (1997–present)", "26,496", "1,392", "19.0", "10,285", "30", "5,896"
-"15", "John Havlicek*", "SF", "Boston Celtics (1962–1978)", "26,395", "1,270", "20.8", "10,513", "0", "5,369"
-"16", "Paul Pierce^", "SF", "Boston Celtics (1998–2013)
-Brooklyn Nets (2013–2014)
-Washington Wizards (2014–2015)
-Los Angeles Clippers (2015–present)", "26,316", "1,318", "20.0", "8,640", "2,128", "6,908"
-"17", "Kevin Garnett^", "PF/C", "Minnesota Timberwolves (1995–2007, 2015–present)
-Boston Celtics (2007–2013)
-Brooklyn Nets (2013–2015)", "26,071", "1,462", "17.8", "10,505", "174", "4,887"
-"18", "Alex English*", "SF/PF", "Milwaukee Bucks (1976–1978)
-Indiana Pacers (1978–1980)
-Denver Nuggets (1980–1990)
-Dallas Mavericks (1990–1991)", "25,613", "1,193", "21.5", "10,659", "18", "4,277"
-"19", "Reggie Miller*", "SG", "Indiana Pacers (1987–2005)", "25,279", "1,389", "18.2", "8,241", "2,560", "6,237"
-"20", "Jerry West*", "PG/SG", "Los Angeles Lakers (1960–1974)", "25,192", "932", "27.0", "9,016", "0", "7,160"
-"21", "Patrick Ewing*", "C", "New York Knicks (1985–2000)
-Seattle SuperSonics (2000–2001)
-Orlando Magic (2001–2002)", "24,815", "1,183", "21.0", "9,702", "19", "5,392"
-"22", "Ray Allen†", "SG", "Milwaukee Bucks (1996–2003)
-Seattle SuperSonics (2003–2007)
-Boston Celtics (2007–2012)
-Miami Heat (2012–2014)", "24,505", "1,300", "18.9", "8,567", "2,973", "4,398"
-"23", "Allen Iverson*", "SG/PG", "Philadelphia 76ers (1996–2006, 2009–2010)
-Denver Nuggets (2006–2008)
-Detroit Pistons (2008–2009)
-Memphis Grizzlies (2009)", "24,368", "914", "26.7", "8,467", "1,061", "6,385"
-"24", "Vince Carter^", "SG/SF", "Toronto Raptors (1998–2004)
-New Jersey Nets (2004–2009)
-Orlando Magic (2009–2010)
-Phoenix Suns (2010–2011)
-Dallas Mavericks (2011–2014)
-Memphis Grizzlies (2014–present)", "23,969", "1,274", "18.8", "8,683", "1,937", "4,666"
-"25", "Charles Barkley*", "PF", "Philadelphia 76ers (1984–1992)
-Phoenix Suns (1992–1996)
-Houston Rockets (1996–2000)", "23,757", "1,073", "22.1", "8,435", "538", "6,349"
-"26", "Robert Parish*", "C", "Golden State Warriors (1976–1980)
-Boston Celtics (1980–1994)
-Charlotte Hornets (1994–1996)
-Chicago Bulls (1996–1997)", "23,334", "1,611", "14.5", "9,614", "0", "4,106"
-"27", "Adrian Dantley*", "SF", "Buffalo Braves (1976–1977)
-Indiana Pacers (1977)
-Los Angeles Lakers (1977–1979)
-Utah Jazz (1979–1986)
-Detroit Pistons (1986–1989)
-Dallas Mavericks (1989–1990)
-Milwaukee Bucks (1990–1991)", "23,177", "955", "24.3", "8,169", "7", "6,832"
-"28", "Elgin Baylor*", "SF/PF", "Minneapolis/Los Angeles Lakers (1958–1971)", "23,149", "846", "27.4", "8,693", "0", "5,763"
-"29", "Carmelo Anthony^", "SF", "Denver Nuggets (2003–2011)
-New York Knicks (2011–present)", "22,497", "902", "24.9", "8,014", "1,021", "5,448"
-"30", "Clyde Drexler*", "SG", "Portland Trail Blazers (1983–1995)
-Houston Rockets (1995–1998)", "22,195", "1,086", "20.4", "8,335", "827", "4,698"
-"31", "Gary Payton*", "PG", "Seattle SuperSonics (1990–2003)
-Milwaukee Bucks (2003)
-Los Angeles Lakers (2003–2004)
-Boston Celtics (2004–2005)
-Miami Heat (2005–2007)", "21,813", "1,335", "16.3", "8,708", "1,132", "3,265"
-"32", "Larry Bird*", "SF/PF", "Boston Celtics (1979–1992)", "21,791", "897", "24.3", "8,591", "649", "3,960"
-"33", "Hal Greer*", "SG", "Syracuse Nationals/Philadelphia 76ers (1958–1973)", "21,586", "1,122", "19.2", "8,504", "0", "4,578"
-"34", "Walt Bellamy*", "C", "Chicago Packers/Zephyrs/Baltimore Bullets (1961–1965)
-New York Knicks (1965–1968)
-Detroit Pistons (1968–1970)
-Atlanta Hawks (1970–1974)
-New Orleans Jazz (1974)", "20,941", "1,043", "20.1", "7,914", "0", "5,113"
-"35", "Bob Pettit*", "PF", "Milwaukee/St. Louis Hawks (1954–1965)", "20,880", "792", "26.4", "7,349", "0", "6,182"
-"36", "David Robinson*", "C", "San Antonio Spurs (1989–2003)", "20,790", "987", "21.1", "7,365", "25", "6,035"
-"37", "George Gervin*", "SG", "San Antonio Spurs (1976–1985)
-Chicago Bulls (1985–1986)", "20,708", "791", "26.2", "8,045", "77", "4,541"
-"38", "Mitch Richmond*", "SG", "Golden State Warriors (1988–1991)
-Sacramento Kings (1991–1998)
-Washington Wizards (1998–2001)
-Los Angeles Lakers (2001–2002)", "20,497", "976", "21.0", "7,305", "1,326", "4,561"
-"39", "Dwyane Wade^", "SG", "Miami Heat (2003–present)", "20,221", "855", "23.7", "7,325", "386", "5,185"
-"40", "Tom Chambers", "PF/C", "San Diego Clippers (1981–1983)
-Seattle SuperSonics (1983–1988)
-Phoenix Suns (1988–1993)
-Utah Jazz (1993–1995)
-Charlotte Hornets (1997)
-Philadelphia 76ers (1997)", "20,049", "1,107", "18.1", "7,378", "227", "5,066"
-"41", "Antawn Jamison†", "PF", "Golden State Warriors (1998–2003)
-Dallas Mavericks (2003–2004)
-Washington Wizards (2004–2010)
-Cleveland Cavaliers (2010–2012)
-Los Angeles Lakers (2012–2013)
-Los Angeles Clippers (2013–2014)", "20,042", "1,083", "18.5", "7,679", "1,163", "3,521"
-"42", "John Stockton*", "PG", "Utah Jazz (1984–2003)", "19,711", "1,504", "13.1", "7,039", "845", "4,788"
-"43", "Bernard King*", "SF", "New Jersey Nets (1977–1979; 1993)
-Utah Jazz (1979–1980)
-Golden State Warriors (1980–1982)
-New York Knicks (1982–1987)
-Washington Bullets (1987–1991)", "19,655", "874", "22.5", "7,830", "23", "3,972"
-"44", "Clifford Robinson", "PF", "Portland Trail Blazers (1989–1997)
-Phoenix Suns (1997–2001)
-Detroit Pistons (2001–2003)
-Golden State Warriors (2003–2005)
-New Jersey Nets (2005–2007)", "19,591", "1,380", "14.2", "7,389", "1,253", "3,560"
-"45", "Walter Davis", "SF/SG", "Phoenix Suns (1977–1988)
-Denver Nuggets (1988–1991; 1991–1992)
-Portland Trail Blazers (1991)", "19,521", "1,033", "18.9", "8,118", "157", "3,128"
-"46", "Terry Cummings", "PF", "San Diego Clippers (1982–1984)
-Milwaukee Bucks (1984–1989; 1995–1996)
-San Antonio Spurs (1989–1995)
-Seattle SuperSonics (1996–1997)
-Philadelphia 76ers (1997–1998)
-New York Knicks (1998)
-Golden State Warriors (1999–2000)", "19,460", "1,183", "16.4", "8,045", "44", "3,326"
-"47", "Joe Johnson^", "SG/SF", "Boston Celtics (2001–2002)
-Phoenix Suns (2002–2005)
-Atlanta Hawks (2005–2012)
-Brooklyn Nets (2012–2016)
-Miami Heat (2016–present)", "19,318", "1,143", "16.9", "7,403", "1,832", "2,680"
-"48", "Bob Lanier*", "C", "Detroit Pistons (1970–1980)
-Milwaukee Bucks (1980–1984)", "19,248", "959", "20.1", "7,761", "2", "3,724"
-"49", "Pau Gasol^", "PF/C", "Memphis Grizzlies (2001–2008)
-Los Angeles Lakers (2008–2014)
-Chicago Bulls (2014–present)", "19,209", "1,055", "18.2", "7,348", "74", "4,439"
-"50", "Eddie Johnson", "SG/SF", "Kansas City/Sacramento Kings (1981–1987)
-Phoenix Suns (1987–1990)
-Seattle SuperSonics (1990–1993)
-Charlotte Hornets (1993–1994)
-Indiana Pacers (1995–1997)
-Houston Rockets (1997–1999)", "19,202", "1,199", "16.0", "7,727", "562", "3,186"
+"Rank","Player","Position(s)","Team(s) played for (years)","Total points","Games played","Points per game average","Field goals made","Three-point field goals made","Free throws made"
+"1","Kareem Abdul-Jabbar*","C","Milwaukee Bucks (1969–1975) Los Angeles Lakers (1975–1989)","38,387","1,560","24.6","15,836","1","6,712"
+"2","Karl Malone*","PF","Utah Jazz (1985–2003) Los Angeles Lakers (2003–2004)","36,928","1,476","25.0","13,528","85","9,787"
+"3","Kobe Bryant†","SG","Los Angeles Lakers (1996–2016)","33,643","1,346","25.0","11,719","1,827","8,378"
+"4","Michael Jordan*","SG","Chicago Bulls (1984–1993; 1995–1998) Washington Wizards (2001–2003)","32,292","1,072","30.1","12,192","581","7,327"
+"5","Wilt Chamberlain*","C","Philadelphia/San Francisco Warriors (1959–1965) Philadelphia 76ers (1965–1968) Los Angeles Lakers (1968–1973)","31,419","1,045","30.1","12,681","0","6,057"
+"6","Dirk Nowitzki^","PF","Dallas Mavericks (1998–present)","29,491","1,340","22.0","10,392","1,701","7,006"
+"7","Shaquille O'Neal*","C","Orlando Magic (1992–1996) Los Angeles Lakers (1996–2004) Miami Heat (2004–2008) Phoenix Suns (2008–2009) Cleveland Cavaliers (2009–2010) Boston Celtics (2010–2011)","28,596","1,207","23.7","11,330","1","5,935"
+"8","Moses Malone*","C","Buffalo Braves (1976) Houston Rockets (1976–1982) Philadelphia 76ers (1982–1986; 1993–1994) Washington Bullets (1986–1988) Atlanta Hawks (1988–1991) Milwaukee Bucks (1991–1993) San Antonio Spurs (1994–1995)","27,409","1,329","20.6","9,435","8","8,531"
+"9","Elvin Hayes*","PF","San Diego/Houston Rockets (1968–1972; 1981–1984) Baltimore/Capital/Washington Bullets (1972–1981)","27,313","1,303","21.0","10,976","5","5,356"
+"10","Hakeem Olajuwon*","C","Houston Rockets (1984–2001) Toronto Raptors (2001–2002)","26,946","1,238","21.8","10,749","25","5,423"
+"11","LeBron James^","SF","Cleveland Cavaliers (2003–2010; 2014–present) Miami Heat (2010–2014)","26,833","987","27.2","9,687","1,343","6,116"
+"12","Oscar Robertson*","PG","Cincinnati Royals (1960–1970) Milwaukee Bucks (1970–1974)","26,710","1,040","25.7","9,508","0","7,694"
+"13","Dominique Wilkins*","SF","Atlanta Hawks (1982–1994) Los Angeles Clippers (1994) Boston Celtics (1994–1995) San Antonio Spurs (1996–1997) Orlando Magic (1999)","26,668","1,074","24.8","9,963","711","6,031"
+"14","Tim Duncan^","PF/C","San Antonio Spurs (1997–present)","26,496","1,392","19.0","10,285","30","5,896"
+"15","John Havlicek*","SF","Boston Celtics (1962–1978)","26,395","1,270","20.8","10,513","0","5,369"
+"16","Paul Pierce^","SF","Boston Celtics (1998–2013) Brooklyn Nets (2013–2014) Washington Wizards (2014–2015) Los Angeles Clippers (2015–present)","26,316","1,318","20.0","8,640","2,128","6,908"
+"17","Kevin Garnett^","PF/C","Minnesota Timberwolves (1995–2007, 2015–present) Boston Celtics (2007–2013) Brooklyn Nets (2013–2015)","26,071","1,462","17.8","10,505","174","4,887"
+"18","Alex English*","SF/PF","Milwaukee Bucks (1976–1978) Indiana Pacers (1978–1980) Denver Nuggets (1980–1990) Dallas Mavericks (1990–1991)","25,613","1,193","21.5","10,659","18","4,277"
+"19","Reggie Miller*","SG","Indiana Pacers (1987–2005)","25,279","1,389","18.2","8,241","2,560","6,237"
+"20","Jerry West*","PG/SG","Los Angeles Lakers (1960–1974)","25,192","932","27.0","9,016","0","7,160"
+"21","Patrick Ewing*","C","New York Knicks (1985–2000) Seattle SuperSonics (2000–2001) Orlando Magic (2001–2002)","24,815","1,183","21.0","9,702","19","5,392"
+"22","Ray Allen†","SG","Milwaukee Bucks (1996–2003) Seattle SuperSonics (2003–2007) Boston Celtics (2007–2012) Miami Heat (2012–2014)","24,505","1,300","18.9","8,567","2,973","4,398"
+"23","Allen Iverson*","SG/PG","Philadelphia 76ers (1996–2006, 2009–2010) Denver Nuggets (2006–2008) Detroit Pistons (2008–2009) Memphis Grizzlies (2009)","24,368","914","26.7","8,467","1,061","6,385"
+"24","Vince Carter^","SG/SF","Toronto Raptors (1998–2004) New Jersey Nets (2004–2009) Orlando Magic (2009–2010) Phoenix Suns (2010–2011) Dallas Mavericks (2011–2014) Memphis Grizzlies (2014–present)","23,969","1,274","18.8","8,683","1,937","4,666"
+"25","Charles Barkley*","PF","Philadelphia 76ers (1984–1992) Phoenix Suns (1992–1996) Houston Rockets (1996–2000)","23,757","1,073","22.1","8,435","538","6,349"
+"26","Robert Parish*","C","Golden State Warriors (1976–1980) Boston Celtics (1980–1994) Charlotte Hornets (1994–1996) Chicago Bulls (1996–1997)","23,334","1,611","14.5","9,614","0","4,106"
+"27","Adrian Dantley*","SF","Buffalo Braves (1976–1977) Indiana Pacers (1977) Los Angeles Lakers (1977–1979) Utah Jazz (1979–1986) Detroit Pistons (1986–1989) Dallas Mavericks (1989–1990) Milwaukee Bucks (1990–1991)","23,177","955","24.3","8,169","7","6,832"
+"28","Elgin Baylor*","SF","Minneapolis/Los Angeles Lakers (1958–1971)","23,149","846","27.4","8,693","0","5,763"
+"29","Carmelo Anthony^","SF","Denver Nuggets (2003–2011) New York Knicks (2011–present)","22,497","902","24.9","8,014","1,021","5,448"
+"30","Clyde Drexler*","SG","Portland Trail Blazers (1983–1995) Houston Rockets (1995–1998)","22,195","1,086","20.4","8,335","827","4,698"
+"31","Gary Payton*","PG","Seattle SuperSonics (1990–2003) Milwaukee Bucks (2003) Los Angeles Lakers (2003–2004) Boston Celtics (2004–2005) Miami Heat (2005–2007)","21,813","1,335","16.3","8,708","1,132","3,265"
+"32","Larry Bird*","SF/PF","Boston Celtics (1979–1992)","21,791","897","24.3","8,591","649","3,960"
+"33","Hal Greer*","SG","Syracuse Nationals/Philadelphia 76ers (1958–1973)","21,586","1,122","19.2","8,504","0","4,578"
+"34","Walt Bellamy*","C","Chicago Packers/Zephyrs/Baltimore Bullets (1961–1965) New York Knicks (1965–1968) Detroit Pistons (1968–1970) Atlanta Hawks (1970–1974) New Orleans Jazz (1974)","20,941","1,043","20.1","7,914","0","5,113"
+"35","Bob Pettit*","PF","Milwaukee/St. Louis Hawks (1954–1965)","20,880","792","26.4","7,349","0","6,182"
+"36","David Robinson*","C","San Antonio Spurs (1989–2003)","20,790","987","21.1","7,365","25","6,035"
+"37","George Gervin*","SG","San Antonio Spurs (1976–1985) Chicago Bulls (1985–1986)","20,708","791","26.2","8,045","77","4,541"
+"38","Mitch Richmond*","SG","Golden State Warriors (1988–1991) Sacramento Kings (1991–1998) Washington Wizards (1998–2001) Los Angeles Lakers (2001–2002)","20,497","976","21.0","7,305","1,326","4,561"
+"39","Dwyane Wade^","SG","Miami Heat (2003–present)","20,221","855","23.7","7,325","386","5,185"
+"40","Tom Chambers","PF/C","San Diego Clippers (1981–1983) Seattle SuperSonics (1983–1988) Phoenix Suns (1988–1993) Utah Jazz (1993–1995) Charlotte Hornets (1997) Philadelphia 76ers (1997)","20,049","1,107","18.1","7,378","227","5,066"
+"41","Antawn Jamison†","PF","Golden State Warriors (1998–2003) Dallas Mavericks (2003–2004) Washington Wizards (2004–2010) Cleveland Cavaliers (2010–2012) Los Angeles Lakers (2012–2013) Los Angeles Clippers (2013–2014)","20,042","1,083","18.5","7,679","1,163","3,521"
+"42","John Stockton*","PG","Utah Jazz (1984–2003)","19,711","1,504","13.1","7,039","845","4,788"
+"43","Bernard King*","SF","New Jersey Nets (1977–1979; 1993) Utah Jazz (1979–1980) Golden State Warriors (1980–1982) New York Knicks (1982–1987) Washington Bullets (1987–1991)","19,655","874","22.5","7,830","23","3,972"
+"44","Clifford Robinson","PF","Portland Trail Blazers (1989–1997) Phoenix Suns (1997–2001) Detroit Pistons (2001–2003) Golden State Warriors (2003–2005) New Jersey Nets (2005–2007)","19,591","1,380","14.2","7,389","1,253","3,560"
+"45","Walter Davis","SF/SG","Phoenix Suns (1977–1988) Denver Nuggets (1988–1991; 1991–1992) Portland Trail Blazers (1991)","19,521","1,033","18.9","8,118","157","3,128"
+"46","Terry Cummings","PF","San Diego Clippers (1982–1984) Milwaukee Bucks (1984–1989; 1995–1996) San Antonio Spurs (1989–1995) Seattle SuperSonics (1996–1997) Philadelphia 76ers (1997–1998) New York Knicks (1998) Golden State Warriors (1999–2000)","19,460","1,183","16.4","8,045","44","3,326"
+"47","Joe Johnson^","SG/SF","Boston Celtics (2001–2002) Phoenix Suns (2002–2005) Atlanta Hawks (2005–2012) Brooklyn Nets (2012–2016) Miami Heat (2016–present)","19,318","1,143","16.9","7,403","1,832","2,680"
+"48","Bob Lanier*","C","Detroit Pistons (1970–1980) Milwaukee Bucks (1980–1984)","19,248","959","20.1","7,761","2","3,724"
+"49","Pau Gasol^","PF/C","Memphis Grizzlies (2001–2008) Los Angeles Lakers (2008–2014) Chicago Bulls (2014–present)","19,209","1,055","18.2","7,348","74","4,439"
+"50","Eddie Johnson","SG/SF","Kansas City/Sacramento Kings (1981–1987) Phoenix Suns (1987–1990) Seattle SuperSonics (1990–1993) Charlotte Hornets (1993–1994) Indiana Pacers (1995–1997) Houston Rockets (1997–1999)","19,202","1,199","16.0","7,727","562","3,186"

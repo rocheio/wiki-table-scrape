@@ -1,27 +1,30 @@
 """Create CSVs from all tables on a Wikipedia article."""
 
+import csv
 import os
-import requests
+import platform
+
 from bs4 import BeautifulSoup
-
-WIKI_URL = "https://en.wikipedia.org/wiki/List_of_mountains_by_elevation"
-OUTPUT_NAME = "mountains"
-
+import requests
 
 def scrape(url, output_name):
-    """Create CSVs from all tables in a Wikipedia article."""
+    """Create CSVs from all tables in a Wikipedia article.
+
+    ARGS:
+        url (str): The full URL of the Wikipedia article to scrape tables from.
+        output_name (str): The base file name (without filepath) to write to.
+    """
 
     # Read tables from Wikipedia article into list of HTML strings
-    req = requests.get(url)
-    soup = BeautifulSoup(req.content, 'lxml')
+    resp = requests.get(url)
+    soup = BeautifulSoup(resp.content, 'lxml')
     table_classes = {"class": ["sortable", "plainrowheaders"]}
     wikitables = soup.findAll("table", table_classes)
 
     # Create folder for output if it doesn't exist
     try:
         os.mkdir(output_name)
-    except Exception:
-        # Generic OS Error
+    except Exception:  # Generic OS Error
         pass
 
     for index, table in enumerate(wikitables):
@@ -33,12 +36,22 @@ def scrape(url, output_name):
 
         filepath = os.path.join(output_name, filename) + '.csv'
 
-        with open(filepath, 'w') as output:
-            write_html_table_to_csv(table, output)
+        with open(filepath, mode='w', newline='', encoding='utf-8') as output:
+            # Deal with Windows inserting an extra '\r' in line terminators
+            if platform.system() == 'Windows':
+                kwargs = {'lineterminator': '\n'}
+
+            csv_writer = csv.writer(output, quoting=csv.QUOTE_ALL, **kwargs)
+            write_html_table_to_csv(table, csv_writer)
 
 
-def write_html_table_to_csv(table, output):
-    """Write HTML table from Wikipedia to a CSV file."""
+def write_html_table_to_csv(table, writer):
+    """Write HTML table from Wikipedia to a CSV file.
+
+    ARGS:
+        table (bs4.Tag): The bs4 Tag object being analyzed.
+        writer (csv.writer): The csv Writer object creating the output.
+    """
 
     # Hold elements that span multiple rows in a list of
     # dictionaries that track 'rows_left' and 'value'
@@ -64,7 +77,7 @@ def write_html_table_to_csv(table, output):
 
         # If an element with rowspan, save it for future cells
         for index, cell in enumerate(cells):
-            if cell.has_key("rowspan"):
+            if cell.has_attr("rowspan"):
                 rowspan_data = {
                     'rows_left': int(cell["rowspan"]),
                     'value': cell,
@@ -73,11 +86,18 @@ def write_html_table_to_csv(table, output):
 
         if cells:
             cleaned = clean_data(cells)
-            output.write(cleaned)
+            writer.writerow(cleaned)
 
 
 def clean_data(row):
-    """Clean table row list from Wikipedia into a string for CSV."""
+    """Clean table row list from Wikipedia into a string for CSV.
+
+    ARGS:
+        row (bs4.ResultSet): The bs4 result set being cleaned for output.
+
+    RETURNS:
+        cleaned_cells (list[str]): List of cleaned text items in this row.
+    """
 
     cleaned_cells = []
 
@@ -97,20 +117,14 @@ def clean_data(row):
         # Strip footnotes from text and join into a single string
         text_items = cell.findAll(text=True)
         no_footnotes = [text for text in text_items if text[0] != '[']
-        puretext = ''.join(no_footnotes)
 
-        # Replace non-breaking spaces with regular spaces
-        puretext = puretext.replace('\xa0', ' ')
-        # Escape double quotes for CSV, then surround with double quotes
-        puretext = puretext.replace('"', '""')
-        quoted = '"' + puretext + '"'
+        cleaned = (
+            ''.join(no_footnotes)  # Combine elements into single string
+            .replace('\xa0', ' ')  # Replace non-breaking spaces
+            .replace('\n', ' ')  # Replace newlines
+            .strip()
+        )
 
-        cleaned_cells += [quoted]
+        cleaned_cells += [cleaned]
 
-    string = ', '.join(cleaned_cells) + '\n'
-    print(string)
-    return string
-
-
-if __name__ == '__main__':
-    scrape(WIKI_URL, OUTPUT_NAME)
+    return cleaned_cells

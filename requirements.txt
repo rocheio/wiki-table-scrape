@@ -1,0 +1,6 @@
+# If on Windows, will also need to install 'lxml' from a .whl at: 
+#     http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml
+
+beautifulsoup4==4.4.1
+bs4==0.0.1
+requests==2.10.0

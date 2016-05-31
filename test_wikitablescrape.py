@@ -7,11 +7,9 @@ import wikitablescrape
 
 # Delete previous output folder if it exists, then create a new one
 try:
-    shutil.rmtree('./output')
-except Exception:  # Generic OS error -- doesn't exist
+    shutil.rmtree('output')
+except FileNotFoundError:
     pass
-
-os.mkdir('output')
 
 wikitablescrape.scrape(
     url="https://en.wikipedia.org/wiki/List_of_mountains_by_elevation",
@@ -34,6 +32,7 @@ wikitablescrape.scrape(
 )
 
 # Move all CSV folders into a single 'output' folder
+os.makedirs('output')
 shutil.move('./mountains', './output')
 shutil.move('./volcanoes', './output')
 shutil.move('./nba', './output')
