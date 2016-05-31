@@ -85,7 +85,15 @@ def write_html_table_to_csv(table, writer):
                 saved_rowspans[index] = rowspan_data
 
         if cells:
+            # Clean the data of references and unusual whitespace
             cleaned = clean_data(cells)
+
+            # Fill the row with empty columns if some are missing
+            # (Some HTML tables leave final empty cells without a <td> tag)
+            columns_missing = len(saved_rowspans) - len(cleaned)
+            if columns_missing:
+                cleaned += [None] * columns_missing
+
             writer.writerow(cleaned)
 
 
