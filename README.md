@@ -2,6 +2,8 @@
 
 Scrape all the tables from a Wikipedia article into a folder of CSV files.
 
+You can read more about it in [the blog post][blog-post]
+
 ## Installation
 
 This is a [Python 3.5][python] module that depends on the [Beautiful Soup][beautiful-soup] and [requests][requests] packages.
