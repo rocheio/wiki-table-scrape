@@ -41,7 +41,13 @@ def scrape(url, output_name):
             if platform.system() == 'Windows':
                 kwargs = {'lineterminator': '\n'}
 
-            csv_writer = csv.writer(output, quoting=csv.QUOTE_ALL, **kwargs)
+                csv_writer = csv.writer(output,
+                                        quoting=csv.QUOTE_ALL,
+                                        **kwargs)
+            else:
+                csv_writer = csv.writer(output,
+                                        quoting=csv.QUOTE_ALL)
+
             write_html_table_to_csv(table, csv_writer)
 
 
