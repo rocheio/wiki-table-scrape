@@ -17,7 +17,7 @@ def scrape(url, output_name):
 
     # Read tables from Wikipedia article into list of HTML strings
     resp = requests.get(url)
-    soup = BeautifulSoup(resp.content, 'lxml')
+    soup = BeautifulSoup(resp.content, "lxml")
     table_classes = {"class": ["sortable", "plainrowheaders"]}
     wikitables = soup.findAll("table", table_classes)
 
@@ -29,11 +29,11 @@ def scrape(url, output_name):
         if index == 0:
             filename = output_name
         else:
-            filename = output_name + '_' + str(index)
+            filename = output_name + "_" + str(index)
 
-        filepath = os.path.join(output_name, filename) + '.csv'
+        filepath = os.path.join(output_name, filename) + ".csv"
 
-        with open(filepath, mode='w', newline='', encoding='utf-8') as output:
+        with open(filepath, mode="w", newline="", encoding="utf-8") as output:
             csv_writer = csv.writer(output, quoting=csv.QUOTE_ALL, lineterminator="\n")
             write_html_table_to_csv(table, csv_writer)
 
@@ -60,21 +60,18 @@ def write_html_table_to_csv(table, writer):
             for index, rowspan_data in enumerate(saved_rowspans):
                 if rowspan_data is not None:
                     # Insert the data from previous row; decrement rows left
-                    value = rowspan_data['value']
+                    value = rowspan_data["value"]
                     cells.insert(index, value)
 
-                    if saved_rowspans[index]['rows_left'] == 1:
+                    if saved_rowspans[index]["rows_left"] == 1:
                         saved_rowspans[index] = None
                     else:
-                        saved_rowspans[index]['rows_left'] -= 1
+                        saved_rowspans[index]["rows_left"] -= 1
 
         # If an element with rowspan, save it for future cells
         for index, cell in enumerate(cells):
             if cell.has_attr("rowspan"):
-                rowspan_data = {
-                    'rows_left': int(cell["rowspan"]),
-                    'value': cell,
-                }
+                rowspan_data = {"rows_left": int(cell["rowspan"]), "value": cell}
                 saved_rowspans[index] = rowspan_data
 
         if cells:
@@ -117,12 +114,12 @@ def clean_data(row):
 
         # Strip footnotes from text and join into a single string
         text_items = cell.findAll(text=True)
-        no_footnotes = [text for text in text_items if text[0] != '[']
+        no_footnotes = [text for text in text_items if text[0] != "["]
 
         cleaned = (
-            ''.join(no_footnotes)  # Combine elements into single string
-            .replace('\xa0', ' ')  # Replace non-breaking spaces
-            .replace('\n', ' ')  # Replace newlines
+            "".join(no_footnotes)  # Combine elements into single string
+            .replace("\xa0", " ")  # Replace non-breaking spaces
+            .replace("\n", " ")  # Replace newlines
             .strip()
         )
 
