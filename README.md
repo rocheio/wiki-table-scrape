@@ -6,13 +6,21 @@ You can read more about it in [the blog post][blog-post]
 
 ## Installation
 
-This is a [Python 3.5][python] module that depends on the [Beautiful Soup][beautiful-soup] and [requests][requests] packages.
+This is a [Python 3][python] module that depends on the [Beautiful Soup][beautiful-soup] and [requests][requests] packages.
 
-1. Clone and `cd` into this repo.
-2. Install [Python 3.5][python].
-3. Install requirements from pip with `pip install -r requirements.txt`.
-4. If on Windows, download the  `.whl` for the [`lxml`][lxml] parser and install it locally.
-5. Test the program by running `python test_wikitablescrape.py`.
+```sh
+# Create and activate a virtualenv for Python 3
+python3 -m venv venv
+. venv/bin/activate
+
+# Install requirements from pip
+pip install -r requirements.txt
+
+# Test the program by downloading sample tables
+python test_wikitablescrape.py
+```
+
+If on Windows, you also need to download the  `.whl` for the [`lxml`][lxml] parser and install it locally.
 
 ## Usage
 

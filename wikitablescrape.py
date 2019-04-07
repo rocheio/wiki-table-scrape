@@ -2,10 +2,10 @@
 
 import csv
 import os
-import platform
 
 from bs4 import BeautifulSoup
 import requests
+
 
 def scrape(url, output_name):
     """Create CSVs from all tables in a Wikipedia article.
@@ -22,10 +22,7 @@ def scrape(url, output_name):
     wikitables = soup.findAll("table", table_classes)
 
     # Create folder for output if it doesn't exist
-    try:
-        os.mkdir(output_name)
-    except Exception:  # Generic OS Error
-        pass
+    os.makedirs(output_name, exist_ok=True)
 
     for index, table in enumerate(wikitables):
         # Make a unique file name for each CSV
@@ -37,17 +34,7 @@ def scrape(url, output_name):
         filepath = os.path.join(output_name, filename) + '.csv'
 
         with open(filepath, mode='w', newline='', encoding='utf-8') as output:
-            # Deal with Windows inserting an extra '\r' in line terminators
-            if platform.system() == 'Windows':
-                kwargs = {'lineterminator': '\n'}
-
-                csv_writer = csv.writer(output,
-                                        quoting=csv.QUOTE_ALL,
-                                        **kwargs)
-            else:
-                csv_writer = csv.writer(output,
-                                        quoting=csv.QUOTE_ALL)
-
+            csv_writer = csv.writer(output, quoting=csv.QUOTE_ALL, lineterminator="\n")
             write_html_table_to_csv(table, csv_writer)
 
 
