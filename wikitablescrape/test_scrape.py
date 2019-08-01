@@ -1,9 +1,9 @@
-"""Test the wikitablescrape script on four articles."""
+"""Test the scrape script on four articles."""
 
 import os
 import shutil
 
-import wikitablescrape
+from . import scrape
 
 # Delete previous output folder if it exists, then create a new one
 try:
@@ -11,24 +11,24 @@ try:
 except FileNotFoundError:
     pass
 
-wikitablescrape.scrape(
+scrape.scrape(
     url="https://en.wikipedia.org/wiki/List_of_mountains_by_elevation",
-    output_name="mountains",
+    output_folder="mountains",
 )
 
-wikitablescrape.scrape(
+scrape.scrape(
     url="https://en.wikipedia.org/wiki/List_of_volcanoes_by_elevation",
-    output_name="volcanoes",
+    output_folder="volcanoes",
 )
 
-wikitablescrape.scrape(
+scrape.scrape(
     url="https://en.wikipedia.org/wiki/List_of_National_Basketball_Association_career_scoring_leaders",
-    output_name="nba",
+    output_folder="nba",
 )
 
-wikitablescrape.scrape(
+scrape.scrape(
     url="https://en.wikipedia.org/wiki/List_of_highest-grossing_films",
-    output_name="films",
+    output_folder="films",
 )
 
 # Move all CSV folders into a single 'output' folder

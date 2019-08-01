@@ -7,12 +7,12 @@ from bs4 import BeautifulSoup
 import requests
 
 
-def scrape(url, output_name):
+def scrape(url, output_folder):
     """Create CSVs from all tables in a Wikipedia article.
 
     ARGS:
         url (str): The full URL of the Wikipedia article to scrape tables from.
-        output_name (str): The base file name (without filepath) to write to.
+        output_folder (str): The directory to write output to.
     """
 
     # Read tables from Wikipedia article into list of HTML strings
@@ -22,7 +22,8 @@ def scrape(url, output_name):
     wikitables = soup.findAll("table", table_classes)
 
     # Create folder for output if it doesn't exist
-    os.makedirs(output_name, exist_ok=True)
+    output_name = os.path.basename(output_folder)
+    os.makedirs(output_folder, exist_ok=True)
 
     for index, table in enumerate(wikitables):
         # Make a unique file name for each CSV
@@ -31,8 +32,9 @@ def scrape(url, output_name):
         else:
             filename = output_name + "_" + str(index)
 
-        filepath = os.path.join(output_name, filename) + ".csv"
+        filepath = os.path.join(output_folder, filename) + ".csv"
 
+        print(f"Writing table {index+1} to {filepath}")
         with open(filepath, mode="w", newline="", encoding="utf-8") as output:
             csv_writer = csv.writer(output, quoting=csv.QUOTE_ALL, lineterminator="\n")
             write_html_table_to_csv(table, csv_writer)

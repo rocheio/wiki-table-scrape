@@ -6,35 +6,26 @@ Read more about the initial project in [the blog post][blog-post].
 
 ## Usage
 
-Just import the module and call the `scrape` function. Pass it the full URL of a Wikipedia article, and a simple string (no special characters or filetypes) for the output name. The output will all be written to the `output_name` folder, with files named `output_name.csv`, `output_name_1.csv`, etc.
+```sh
+# Create and activate a virtualenv for Python 3
+python3 -m venv venv
+. venv/bin/activate
+pip install -r requirements.txt
 
-```python
-import wikitablescrape
+# Download a page into a folder of CSV files
+python -m wikitablescrape --url="https://en.wikipedia.org/wiki/List_of_mountains_by_elevation" --output-folder="/tmp/mountains"
 
-wikitablescrape.scrape(
-    url="https://en.wikipedia.org/wiki/List_of_highest-grossing_films",
-    output_name="films"
-)
-```
+# Inspect the output
+ls /tmp/mountains
+# mountains.csv   mountains_2.csv mountains_4.csv mountains_6.csv mountains_8.csv
+# mountains_1.csv mountains_3.csv mountains_5.csv mountains_7.csv
 
-Inspecting the output with Bash gives the following results:
-
-```text
-$ ls films/
-films.csv  films_1.csv  films_2.csv  films_3.csv
-
-$ cat films/films_1.csv
-"Rank","Title","Worldwide gross (2014 $)","Year"
-"1","Gone with the Wind","$3,440,000,000","1939"
-"2","Avatar","$3,020,000,000","2009"
-"3","Star Wars","$2,825,000,000","1977"
-"4","Titanic","$2,516,000,000","1997"
-"5","The Sound of Music","$2,366,000,000","1965"
-"6","E.T. the Extra-Terrestrial","$2,310,000,000","1982"
-"7","The Ten Commandments","$2,187,000,000","1956"
-"8","Doctor Zhivago","$2,073,000,000","1965"
-"9","Jaws","$2,027,000,000","1975"
-"10","Snow White and the Seven Dwarfs","$1,819,000,000","1937"
+head -5 /tmp/mountains/mountains.csv
+# "Mountain","Metres","Feet","Range","Location and Notes"
+# "Mount Everest","8,848","29,029","Himalayas","Nepal/China"
+# "K2","8,611","28,251","Karakoram","Pakistan/China"
+# "Kangchenjunga","8,586","28,169","Himalayas","Nepal/India – Highest in India"
+# "Lhotse","8,516","27,940","Himalayas","Nepal/China – Climbers ascend Lhotse Face in climbing Everest"
 ```
 
 ## Local Development
@@ -50,10 +41,10 @@ python3 -m venv venv
 pip install -r requirements.txt
 
 # Test the program by downloading sample tables
-python test_wikitablescrape.py
+python -m unittest discover
 ```
 
-If on Windows, you also need to download the  `.whl` for the [`lxml`][lxml] parser and install it locally.
+If on Windows, you may also need to download the  `.whl` for the [`lxml`][lxml] parser and install it locally.
 
 ## Disclaimers
 
