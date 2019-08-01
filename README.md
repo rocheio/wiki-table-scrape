@@ -1,26 +1,8 @@
 # wiki-table-scrape
 
-Scrape all the tables from a Wikipedia article into a folder of CSV files.
+Scrape HTML tables from a Wikipedia page into CSV format.
 
-You can read more about it in [the blog post][blog-post]
-
-## Installation
-
-This is a [Python 3][python] module that depends on the [Beautiful Soup][beautiful-soup] and [requests][requests] packages.
-
-```sh
-# Create and activate a virtualenv for Python 3
-python3 -m venv venv
-. venv/bin/activate
-
-# Install requirements from pip
-pip install -r requirements.txt
-
-# Test the program by downloading sample tables
-python test_wikitablescrape.py
-```
-
-If on Windows, you also need to download the  `.whl` for the [`lxml`][lxml] parser and install it locally.
+Read more about the initial project in [the blog post][blog-post].
 
 ## Usage
 
@@ -54,6 +36,24 @@ $ cat films/films_1.csv
 "9","Jaws","$2,027,000,000","1975"
 "10","Snow White and the Seven Dwarfs","$1,819,000,000","1937"
 ```
+
+## Local Development
+
+This package depends on [Python 3][python]. Follow these steps if you want to develop and test the package locally.
+
+```sh
+# Create and activate a virtualenv for Python 3
+python3 -m venv venv
+. venv/bin/activate
+
+# Install requirements from pip
+pip install -r requirements.txt
+
+# Test the program by downloading sample tables
+python test_wikitablescrape.py
+```
+
+If on Windows, you also need to download the  `.whl` for the [`lxml`][lxml] parser and install it locally.
 
 ## Disclaimers
 
