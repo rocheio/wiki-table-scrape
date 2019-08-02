@@ -17,9 +17,7 @@ def scrape(url, output_folder):
 
     # Read tables from Wikipedia article into list of HTML strings
     resp = requests.get(url)
-    soup = BeautifulSoup(resp.content, "lxml")
-    table_classes = {"class": ["sortable", "plainrowheaders"]}
-    wikitables = soup.findAll("table", table_classes)
+    wikitables = get_tables_from_html(resp.content)
 
     # Create folder for output if it doesn't exist
     output_name = os.path.basename(output_folder)
@@ -39,6 +37,13 @@ def scrape(url, output_folder):
             csv_writer = csv.writer(output, quoting=csv.QUOTE_ALL, lineterminator="\n")
             for row in parse_rows_from_table(table):
                 csv_writer.writerow(row)
+
+
+def get_tables_from_html(text):
+    """Return all HTML tables from Wikipedia page text."""
+    soup = BeautifulSoup(text, "lxml")
+    table_classes = {"class": ["sortable", "plainrowheaders"]}
+    return soup.findAll("table", table_classes)
 
 
 def parse_rows_from_table(table):

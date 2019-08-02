@@ -1,7 +1,9 @@
 """Test the scrape script on four articles."""
 
+import csv
 import os
 import shutil
+import unittest
 
 from . import scrape
 
@@ -37,3 +39,16 @@ shutil.move("./mountains", "./output")
 shutil.move("./volcanoes", "./output")
 shutil.move("./nba", "./output")
 shutil.move("./films", "./output")
+
+
+class TestHTMLFiles(unittest.TestCase):
+    def test_mountains(self):
+        with open("testdata/mountains/input.html", "r") as htmlfile:
+            table = scrape.get_tables_from_html(htmlfile.read())[0]
+            got = scrape.parse_rows_from_table(table)
+
+        with open("testdata/mountains/output.csv", "r") as csvfile:
+            want = list(csv.reader(csvfile))
+
+        for g, w in zip(got, want):
+            assert g == w, f"got '{g}' want '{w}'"
