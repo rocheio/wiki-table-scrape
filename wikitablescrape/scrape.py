@@ -37,16 +37,12 @@ def scrape(url, output_folder):
         print(f"Writing table {index+1} to {filepath}")
         with open(filepath, mode="w", newline="", encoding="utf-8") as output:
             csv_writer = csv.writer(output, quoting=csv.QUOTE_ALL, lineterminator="\n")
-            write_html_table_to_csv(table, csv_writer)
+            for row in parse_rows_from_table(table):
+                csv_writer.writerow(row)
 
 
-def write_html_table_to_csv(table, writer):
-    """Write HTML table from Wikipedia to a CSV file.
-
-    ARGS:
-        table (bs4.Tag): The bs4 Tag object being analyzed.
-        writer (csv.writer): The csv Writer object creating the output.
-    """
+def parse_rows_from_table(table):
+    """Yield CSV rows from a bs4.Tag Wikipedia HTML table."""
 
     # Hold elements that span multiple rows in a list of
     # dictionaries that track 'rows_left' and 'value'
@@ -86,7 +82,7 @@ def write_html_table_to_csv(table, writer):
             if columns_missing:
                 cleaned += [None] * columns_missing
 
-            writer.writerow(cleaned)
+        yield cleaned
 
 
 def clean_data(row):
