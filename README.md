@@ -40,8 +40,11 @@ python3 -m venv venv
 # Install requirements from pip
 pip install -r requirements.txt
 
-# Test the program by downloading sample tables
-python -m unittest discover
+# Run unit tests and code coverage checks
+coverage run --source wikitablescrape -m unittest discover && coverage report --fail-under=50
+
+# (Optionally) See coverage data
+coverage html && open htmlcov/index.html
 ```
 
 If on Windows, you may also need to download the  `.whl` for the [`lxml`][lxml] parser and install it locally.
