@@ -78,8 +78,8 @@ def parse_rows_from_table(table):
                 saved_rowspans[index] = rowspan_data
 
         if cells:
-            # Clean the data of references and unusual whitespace
-            cleaned = clean_data(cells)
+            # Clean the table data of references and unusual whitespace
+            cleaned = [clean_cell(cell) for cell in cells]
 
             # Fill the row with empty columns if some are missing
             # (Some HTML tables leave final empty cells without a <td> tag)
@@ -90,42 +90,30 @@ def parse_rows_from_table(table):
         yield cleaned
 
 
-def clean_data(row):
-    """Clean table row list from Wikipedia into a string for CSV.
+def clean_cell(cell):
+    """Yield clean string value from a bs4.Tag from Wikipedia."""
 
-    ARGS:
-        row (bs4.ResultSet): The bs4 result set being cleaned for output.
+    # Strip references from the cell (tooltips on mouse-over)
+    references = cell.findAll("sup", {"class": "reference"})
+    if references:
+        for ref in references:
+            ref.extract()
 
-    RETURNS:
-        cleaned_cells (list[str]): List of cleaned text items in this row.
-    """
+    # Strip sortkeys from the cell
+    sortkeys = cell.findAll("span", {"class": "sortkey"})
+    if sortkeys:
+        for ref in sortkeys:
+            ref.extract()
 
-    cleaned_cells = []
+    # Strip footnotes from text (`[# 1] links`)
+    text_items = cell.findAll(text=True)
+    no_footnotes = [text for text in text_items if text[0] != "["]
 
-    for cell in row:
-        # Strip references from the cell
-        references = cell.findAll("sup", {"class": "reference"})
-        if references:
-            for ref in references:
-                ref.extract()
+    cleaned = (
+        "".join(no_footnotes)  # Combine remaining elements into single string
+        .replace("\xa0", " ")  # Replace non-breaking spaces
+        .replace("\n", " ")  # Replace newlines
+        .strip()
+    )
 
-        # Strip sortkeys from the cell
-        sortkeys = cell.findAll("span", {"class": "sortkey"})
-        if sortkeys:
-            for ref in sortkeys:
-                ref.extract()
-
-        # Strip footnotes from text and join into a single string
-        text_items = cell.findAll(text=True)
-        no_footnotes = [text for text in text_items if text[0] != "["]
-
-        cleaned = (
-            "".join(no_footnotes)  # Combine elements into single string
-            .replace("\xa0", " ")  # Replace non-breaking spaces
-            .replace("\n", " ")  # Replace newlines
-            .strip()
-        )
-
-        cleaned_cells += [cleaned]
-
-    return cleaned_cells
+    return cleaned
