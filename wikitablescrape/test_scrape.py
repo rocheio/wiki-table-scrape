@@ -1,6 +1,7 @@
 """Test the wikitablescrape package."""
 
 import csv
+import tempfile
 import unittest
 
 from . import scrape
@@ -24,3 +25,14 @@ class TestFiles(unittest.TestCase):
 
             for g, w in zip(got, want):
                 assert g == w, f"got '{g}' want '{w}'"
+
+
+class TestDownload(unittest.TestCase):
+    """Test that a request downloads files to a temp folder."""
+
+    def test_scrape(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            scrape.scrape(
+                url="https://en.wikipedia.org/wiki/List_of_mountains_by_elevation",
+                output_folder=tmpdir,
+            )
