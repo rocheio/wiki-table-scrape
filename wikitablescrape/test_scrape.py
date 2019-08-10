@@ -12,6 +12,8 @@ class TestFiles(unittest.TestCase):
 
     def test_parse_rows_from_table(self):
         cases = [
+            ("testdata/languages/input.html", "testdata/languages/output.csv"),
+            ("testdata/linebreaks/input.html", "testdata/linebreaks/output.csv"),
             ("testdata/mountains/input.html", "testdata/mountains/output.csv"),
             ("testdata/rowspan/input.html", "testdata/rowspan/output.csv"),
         ]
@@ -24,7 +26,7 @@ class TestFiles(unittest.TestCase):
                 want = list(csv.reader(csvfile))
 
             for g, w in zip(got, want):
-                assert g == w, f"got '{g}' want '{w}'"
+                assert g == w, f"\ngot:\n\t{g}\nwant:\n\t{w}"
 
 
 class TestDownload(unittest.TestCase):
@@ -33,6 +35,6 @@ class TestDownload(unittest.TestCase):
     def test_scrape(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             scrape.scrape(
-                url="https://en.wikipedia.org/wiki/List_of_mountains_by_elevation",
+                url="https://en.wikipedia.org/wiki/List_of_volcanoes_by_elevation",
                 output_folder=tmpdir,
             )

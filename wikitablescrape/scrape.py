@@ -102,8 +102,14 @@ def clean_cell(cell):
     # Strip sortkeys from the cell
     sortkeys = cell.findAll("span", {"class": "sortkey"})
     if sortkeys:
-        for ref in sortkeys:
-            ref.extract()
+        for sortkey in sortkeys:
+            sortkey.extract()
+
+    # Replace line breaks with spaces
+    linebreaks = cell.findAll("br")
+    if linebreaks:
+        for linebreak in linebreaks:
+            linebreak.replace_with(new_span(" "))
 
     # Strip footnotes from text (`[# 1] links`)
     text_items = cell.findAll(text=True)
@@ -117,3 +123,8 @@ def clean_cell(cell):
     )
 
     return cleaned
+
+
+def new_span(text):
+    """Return a new bs4.Tag <span> element with the given value."""
+    return BeautifulSoup(f"<span>{text}</span>", "lxml").html.body.span
