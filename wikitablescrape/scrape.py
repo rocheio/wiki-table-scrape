@@ -56,6 +56,12 @@ def parse_rows_from_table(table):
     for row in table.findAll("tr"):
         cells = row.findAll(["th", "td"])
 
+        # Duplicate column values with a `colspan`
+        for index, cell in reverse_enum(cells):
+            if cell.has_attr("colspan"):
+                for _ in range(int(cell["colspan"]) - 1):
+                    cells.insert(index, cell)
+
         # If the first row, use it to define width of table
         if len(saved_rowspans) == 0:
             saved_rowspans = [None for _ in cells]
@@ -131,3 +137,8 @@ def clean_cell(cell):
 def new_span(text):
     """Return a new bs4.Tag <span> element with the given value."""
     return BeautifulSoup(f"<span>{text}</span>", "lxml").html.body.span
+
+
+def reverse_enum(iterable):
+    """Return a reversed iterable with its reversed index."""
+    return zip(range(len(iterable)-1, -1, -1), reversed(iterable))
