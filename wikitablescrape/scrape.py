@@ -2,6 +2,7 @@
 
 import csv
 import os
+import re
 
 from bs4 import BeautifulSoup
 import requests
@@ -122,6 +123,8 @@ def clean_cell(cell):
         .strip()
     )
 
+    # Replace all remaining whitespace with single spaces
+    cleaned = re.sub(r"\s\s+", " ", cleaned)
     return cleaned
 
 
