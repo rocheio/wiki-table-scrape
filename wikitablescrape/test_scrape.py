@@ -12,7 +12,7 @@ class TestFiles(unittest.TestCase):
     def test_parse_rows_from_table(self):
         cases = [
             ("testdata/mountains/input.html", "testdata/mountains/output.csv"),
-            ("testdata/films/input.html", "testdata/films/output.csv"),
+            ("testdata/rowspan/input.html", "testdata/rowspan/output.csv"),
         ]
         for testin, testout in cases:
             with open(testin, "r") as htmlfile:
