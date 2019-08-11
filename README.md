@@ -13,14 +13,21 @@ python3 -m venv venv
 pip install -r requirements.txt
 
 # Download a page into a folder of CSV files
-python -m wikitablescrape --url="https://en.wikipedia.org/wiki/List_of_mountains_by_elevation" --output-folder="/tmp/mountains"
+python -m wikitablescrape --output-folder="/tmp/scrape" --url="https://en.wikipedia.org/wiki/List_of_mountains_by_elevation"
 
 # Inspect the output
-ls /tmp/mountains
-# mountains.csv   mountains_2.csv mountains_4.csv mountains_6.csv mountains_8.csv
-# mountains_1.csv mountains_3.csv mountains_5.csv mountains_7.csv
+ls -l /tmp/scrape | awk '{print $5"\t"$9}'
+# 10817	1000_metres.csv
+# 17354	2000_metres.csv
+# 18894	3000_metres.csv
+# 16955	4000_metres.csv
+# 5304	5000_metres.csv
+# 6633	6000_metres.csv
+# 7156	7000_metres.csv
+# 1098	8000_metres.csv
+# 7984	under_1000_metres.csv
 
-head -5 /tmp/mountains/mountains.csv
+head -5 /tmp/scrape/8000_metres.csv
 # "Mountain","Metres","Feet","Range","Location and Notes"
 # "Mount Everest","8,848","29,029","Himalayas","Nepal/China"
 # "K2","8,611","28,251","Karakoram","Pakistan/China"
