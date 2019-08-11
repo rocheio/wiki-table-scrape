@@ -9,16 +9,15 @@ import requests
 
 
 def scrape(url, output_folder):
-    """Create CSVs from all tables in a Wikipedia article.
-
-    ARGS:
-        url (str): The full URL of the Wikipedia article to scrape tables from.
-        output_folder (str): The directory to write output to.
-    """
-
-    # Read tables from Wikipedia article into list of HTML strings
+    """Scrape the text of a Wikipedia page, parsed from the URL of that page."""
     resp = requests.get(url)
-    wikitables = get_tables_from_html(resp.content)
+    resp.raise_for_status()
+    scrape_text(resp.context, output_folder)
+
+
+def scrape_text(text, output_folder):
+    """Scrape the text from a Wikipedia page into a directory of CSV files."""
+    wikitables = get_tables_from_html(text)
 
     # Create folder for output if it doesn't exist
     output_name = os.path.basename(output_folder)
@@ -38,8 +37,7 @@ def scrape(url, output_folder):
 def get_tables_from_html(text):
     """Return all HTML tables from Wikipedia page text."""
     soup = BeautifulSoup(text, "lxml")
-    table_classes = {"class": ["wikitable", "sortable", "plainrowheaders"]}
-    return soup.findAll("table", table_classes)
+    return soup.findAll("table")
 
 
 def parse_rows_from_table(table):
@@ -160,6 +158,7 @@ def parse_table_header(table, default):
 
 def csv_filename(text):
     """Return a normalized filename from a table header for outputting CSV."""
-    text = re.sub(r"[,|\(|\)]", " ", text.lower())
+    text = text.replace(",", "")
+    text = re.sub(r"[\(|\)]", " ", text.lower())
     text = text.replace(" - ", "-")  # Avoid `a_-_b` formatting in final output
     return "_".join(text.split()) + ".csv"

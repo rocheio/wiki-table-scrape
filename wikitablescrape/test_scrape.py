@@ -1,6 +1,7 @@
 """Test the wikitablescrape package."""
 
 import csv
+import os
 import tempfile
 import unittest
 
@@ -26,15 +27,27 @@ class TestFiles(unittest.TestCase):
                 want = list(csv.reader(csvfile))
 
             for g, w in zip(got, want):
-                assert g == w, f"\ngot:\n\t{g}\nwant:\n\t{w}"
+                self.assertEqual(g, w)
 
 
 class TestDownload(unittest.TestCase):
     """Test that a request downloads files to a temp folder."""
 
-    def test_scrape(self):
+    def test_scrape_text(self):
         with tempfile.TemporaryDirectory() as tmpdir:
-            scrape.scrape(
-                url="https://en.wikipedia.org/wiki/List_of_volcanoes_by_elevation",
-                output_folder=tmpdir,
-            )
+            with open("testdata/wholepage/volcanoes.html") as htmlfile:
+                scrape.scrape_text(
+                    text=htmlfile.read(),
+                    output_folder=tmpdir,
+                )
+            want = [
+                '1000_metres.csv',
+                '2000_metres.csv',
+                '3000_metres.csv',
+                '4000_metres.csv',
+                '5000_metres.csv',
+                '6000_metres.csv',
+                'from_its_base_on_the_ocean_floor.csv'
+            ]
+            got = sorted(os.listdir(tmpdir))
+            self.assertEqual(got, want)
