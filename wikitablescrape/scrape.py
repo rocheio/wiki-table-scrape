@@ -25,13 +25,8 @@ def scrape(url, output_folder):
     os.makedirs(output_folder, exist_ok=True)
 
     for index, table in enumerate(wikitables):
-        # Make a unique file name for each CSV
-        if index == 0:
-            filename = output_name
-        else:
-            filename = output_name + "_" + str(index)
-
-        filepath = os.path.join(output_folder, filename) + ".csv"
+        header = parse_table_header(table, default=output_name)
+        filepath = os.path.join(output_folder, csv_filename(header))
 
         print(f"Writing table {index+1} to {filepath}")
         with open(filepath, mode="w", newline="", encoding="utf-8") as output:
@@ -100,17 +95,19 @@ def parse_rows_from_table(table):
 def clean_cell(cell):
     """Yield clean string value from a bs4.Tag from Wikipedia."""
 
-    # Strip references from the cell (tooltips on mouse-over)
-    references = cell.findAll("sup", {"class": "reference"})
-    if references:
-        for ref in references:
-            ref.extract()
+    to_remove = (
+        # Tooltip references with mouse-over effects
+        {"name": "sup", "class": "reference"},
+        # Keys for special sorting effects on the table
+        {"name": "sup", "class": "sortkey"},
+        # Wikipedia `[edit]` buttons
+        {"name": "span", "class": "mw-editsection"},
+    )
 
-    # Strip sortkeys from the cell
-    sortkeys = cell.findAll("span", {"class": "sortkey"})
-    if sortkeys:
-        for sortkey in sortkeys:
-            sortkey.extract()
+    # Remove extra tags not essential to the table
+    for definition in to_remove:
+        for tag in cell.findAll(**definition):
+            tag.extract()
 
     # Replace line breaks with spaces
     linebreaks = cell.findAll("br")
@@ -118,19 +115,18 @@ def clean_cell(cell):
         for linebreak in linebreaks:
             linebreak.replace_with(new_span(" "))
 
-    # Strip footnotes from text (`[# 1] links`)
-    text_items = cell.findAll(text=True)
-    no_footnotes = [text for text in text_items if text[0] != "["]
+    # Strip footnotes and other bracketed sections
+    no_brackets = [tag for tag in cell.findAll(text=True) if not tag.startswith("[")]
 
     cleaned = (
-        "".join(no_footnotes)  # Combine remaining elements into single string
+        "".join(no_brackets)  # Combine remaining elements into single string
         .replace("\xa0", " ")  # Replace non-breaking spaces
         .replace("\n", " ")  # Replace newlines
         .strip()
     )
 
     # Replace all remaining whitespace with single spaces
-    cleaned = re.sub(r"\s\s+", " ", cleaned)
+    cleaned = re.sub(r"\s+", " ", cleaned)
     return cleaned
 
 
@@ -142,3 +138,22 @@ def new_span(text):
 def reverse_enum(iterable):
     """Return a reversed iterable with its reversed index."""
     return zip(range(len(iterable)-1, -1, -1), reversed(iterable))
+
+
+def parse_table_header(table, default):
+    """Return the best approximation of a title for a bs4.Tag Wikitable."""
+    caption = table.find("caption")
+    if caption:
+        return clean_cell(caption)
+
+    header = table.findPrevious("h2")
+    if header:
+        return clean_cell(header)
+
+    return default
+
+
+def csv_filename(text):
+    """Return a normalized filename from a table header for outputting CSV."""
+    text = text.lower().replace(",", "")
+    return "_".join(text.split()) + ".csv"
