@@ -9,7 +9,7 @@ from . import scrape
 
 
 class TestFiles(unittest.TestCase):
-    """Test parsing HTML into CSV using saved files."""
+    """Test parsing HTML into CSVs using saved files."""
 
     def test_parse_rows_from_table(self):
         cases = [
@@ -29,14 +29,10 @@ class TestFiles(unittest.TestCase):
             for g, w in zip(got, want):
                 self.assertEqual(g, w)
 
-
-class TestDownload(unittest.TestCase):
-    """Test that a request downloads files to a temp folder."""
-
-    def test_scrape_text(self):
+    def test_scrape_tables_from_text(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             with open("testdata/wholepage/volcanoes.html") as htmlfile:
-                scrape.scrape_text(
+                scrape.scrape_tables_from_text(
                     text=htmlfile.read(),
                     output_folder=tmpdir,
                 )
@@ -51,3 +47,42 @@ class TestDownload(unittest.TestCase):
             ]
             got = sorted(os.listdir(tmpdir))
             self.assertEqual(got, want)
+
+
+class TestParseTableHeader(unittest.TestCase):
+
+    def test_caption(self):
+        """A table with a <caption> will always choose that."""
+        html = """
+            <h2>Header</h2>
+            <table>
+                <caption>Caption</caption>
+            </table>
+        """
+        table = scrape.get_tables_from_html(html)[0]
+        got = scrape.parse_table_header(table)
+        want = "Caption"
+        self.assertEqual(got, want)
+
+    def test_h2(self):
+        """A table without a caption returns the preceeding <h2>."""
+        html = """
+            <h2>Header</h2>
+            <table></table>
+        """
+        table = scrape.get_tables_from_html(html)[0]
+        got = scrape.parse_table_header(table)
+        want = "Header"
+        self.assertEqual(got, want)
+
+    def test_h2_and_h3(self):
+        """A table with an <h2> header will also check for <h3> subheaders."""
+        html = """
+            <h2>Header</h2>
+            <h3>Subheader</h3>
+            <table></table>
+        """
+        table = scrape.get_tables_from_html(html)[0]
+        got = scrape.parse_table_header(table)
+        want = "Header - Subheader"
+        self.assertEqual(got, want)

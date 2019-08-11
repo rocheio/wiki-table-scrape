@@ -12,10 +12,10 @@ def scrape(url, output_folder):
     """Scrape the text of a Wikipedia page, parsed from the URL of that page."""
     resp = requests.get(url)
     resp.raise_for_status()
-    scrape_text(resp.context, output_folder)
+    scrape_tables_from_text(resp.text, output_folder)
 
 
-def scrape_text(text, output_folder):
+def scrape_tables_from_text(text, output_folder):
     """Scrape the text from a Wikipedia page into a directory of CSV files."""
     wikitables = get_tables_from_html(text)
 
@@ -138,7 +138,7 @@ def reverse_enum(iterable):
     return zip(range(len(iterable)-1, -1, -1), reversed(iterable))
 
 
-def parse_table_header(table, default):
+def parse_table_header(table, default="Unknown Table"):
     """Return the best approximation of a title for a bs4.Tag Wikitable."""
     caption = table.find("caption")
     if caption:
