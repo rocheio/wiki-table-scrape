@@ -56,6 +56,11 @@ coverage html && open htmlcov/index.html
 
 If on Windows, you may also need to download the  `.whl` for the [`lxml`](http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml) parser and install it locally.
 
+### Where to Start?
+
+- [Top 25 Articles this Month](https://en.wikipedia.org/wiki/Wikipedia:Top_25_Report)
+- [Top 100 Articles of All Time](https://en.wikipedia.org/wiki/Wikipedia:Multiyear_ranking_of_most_viewed_pages#Top-100_list)
+
 ## Contributing
 
 If you would like to contribute to this module, please open an issue or pull request.

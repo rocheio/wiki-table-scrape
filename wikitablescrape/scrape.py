@@ -38,7 +38,7 @@ def scrape(url, output_folder):
 def get_tables_from_html(text):
     """Return all HTML tables from Wikipedia page text."""
     soup = BeautifulSoup(text, "lxml")
-    table_classes = {"class": ["sortable", "plainrowheaders"]}
+    table_classes = {"class": ["wikitable", "sortable", "plainrowheaders"]}
     return soup.findAll("table", table_classes)
 
 
@@ -146,14 +146,20 @@ def parse_table_header(table, default):
     if caption:
         return clean_cell(caption)
 
-    header = table.findPrevious("h2")
-    if header:
-        return clean_cell(header)
+    h2 = table.findPrevious("h2")
+    if h2:
+        header = clean_cell(h2)
+        # Try to find a subheader as well
+        h3 = table.findPrevious("h3")
+        if h3:
+            header += f" - {clean_cell(h3)}"
+        return header
 
     return default
 
 
 def csv_filename(text):
     """Return a normalized filename from a table header for outputting CSV."""
-    text = text.lower().replace(",", "")
+    text = re.sub(r"[,|\(|\)]", " ", text.lower())
+    text = text.replace(" - ", "-")  # Avoid `a_-_b` formatting in final output
     return "_".join(text.split()) + ".csv"
