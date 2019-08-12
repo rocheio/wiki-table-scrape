@@ -1,6 +1,7 @@
 """Create CSVs from all tables on a Wikipedia article."""
 
 import csv
+import logging
 import os
 import re
 
@@ -8,8 +9,12 @@ from bs4 import BeautifulSoup
 import requests
 
 
+LOGGER = logging.getLogger(__name__)
+
+
 def scrape(url, output_folder):
     """Scrape the text of a Wikipedia page, parsed from the URL of that page."""
+    LOGGER.info(f"Scraping data from {url} into {output_folder}")
     resp = requests.get(url)
     resp.raise_for_status()
     scrape_tables_from_text(resp.text, output_folder)
@@ -27,7 +32,7 @@ def scrape_tables_from_text(text, output_folder):
         header = parse_table_header(table, default=output_name)
         filepath = os.path.join(output_folder, csv_filename(header))
 
-        print(f"Writing table {index+1} to {filepath}")
+        LOGGER.info(f"Writing table {index+1} to {filepath}")
         with open(filepath, mode="w", newline="", encoding="utf-8") as output:
             csv_writer = csv.writer(output, quoting=csv.QUOTE_ALL, lineterminator="\n")
             for row in parse_rows_from_table(table):
