@@ -94,6 +94,6 @@ class TestParseTableHeader(unittest.TestCase):
 
     def test_table_only(self):
         """A table with no other information will return a default value."""
-        self.assert_header_from_table("Unknown Table", """
+        self.assert_header_from_table(None, """
             <table></table>
         """)

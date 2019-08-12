@@ -25,11 +25,10 @@ def scrape_tables_from_text(text, output_folder):
     wikitables = get_tables_from_html(text)
 
     # Create folder for output if it doesn't exist
-    output_name = os.path.basename(output_folder)
     os.makedirs(output_folder, exist_ok=True)
 
     for index, table in enumerate(wikitables):
-        header = parse_table_header(table, default=output_name)
+        header = parse_table_header(table) or f"table_{index+1}"
         filepath = os.path.join(output_folder, csv_filename(header))
 
         LOGGER.info(f"Writing table {index+1} to {filepath}")
@@ -143,8 +142,8 @@ def reverse_enum(iterable):
     return zip(range(len(iterable)-1, -1, -1), reversed(iterable))
 
 
-def parse_table_header(table, default="Unknown Table"):
-    """Return the best approximation of a title for a bs4.Tag Wikitable."""
+def parse_table_header(table):
+    """Return the best title for a bs4.Tag Wikitable, or None if not found."""
     caption = table.find("caption")
     if caption:
         return clean_cell(caption)
@@ -158,7 +157,7 @@ def parse_table_header(table, default="Unknown Table"):
             header += f" - {clean_cell(h3)}"
         return header
 
-    return default
+    return None
 
 
 def csv_filename(text):
