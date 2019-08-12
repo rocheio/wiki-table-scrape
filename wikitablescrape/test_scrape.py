@@ -68,10 +68,11 @@ class TestParseTableHeader(unittest.TestCase):
         self.assertEqual(got, header)
 
     def test_caption(self):
-        """A table with a <caption> will always choose that."""
+        """A table with a <caption> will always use the caption."""
         self.assert_header_from_table("Caption", """
             <h2>Header</h2>
-            <table>
+            <h3>Subheader</h3>
+            <table id="id" class="class">
                 <caption>Caption</caption>
             </table>
         """)
@@ -88,5 +89,11 @@ class TestParseTableHeader(unittest.TestCase):
         self.assert_header_from_table("Header - Subheader", """
             <h2>Header</h2>
             <h3>Subheader</h3>
+            <table></table>
+        """)
+
+    def test_table_only(self):
+        """A table with no other information will return a default value."""
+        self.assert_header_from_table("Unknown Table", """
             <table></table>
         """)
