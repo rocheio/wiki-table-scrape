@@ -41,6 +41,10 @@ class TestParseTables(unittest.TestCase):
         """Confirm that <small> elements are included and `"` quotes are escaped."""
         self.assert_html_to_csv("testdata/mountains/input.html", "testdata/mountains/output.csv")
 
+    def test_single_img_cells(self):
+        """Confirm that single <img> elements within cells become alt-text."""
+        self.assert_html_to_csv("testdata/imgcells/input.html", "testdata/imgcells/output.csv")
+
     def test_scrape_tables_from_text(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             with open("testdata/wholepage/volcanoes.html") as htmlfile:

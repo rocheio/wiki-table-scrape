@@ -120,19 +120,19 @@ def clean_cell(cell):
         for linebreak in linebreaks:
             linebreak.replace_with(new_span(" "))
 
-    # Strip footnotes and other bracketed sections
-    no_brackets = [tag for tag in cell.findAll(text=True) if not tag.startswith("[")]
+    # If cell is only a single image, use its alt-text
+    tags = cell.findAll()
+    if len(tags) == 1 and tags[0].name == 'img':
+        return spaces_only(tags[0]["alt"])
 
-    cleaned = (
-        "".join(no_brackets)  # Combine remaining elements into single string
-        .replace("\xa0", " ")  # Replace non-breaking spaces
-        .replace("\n", " ")  # Replace newlines
-        .strip()
-    )
+    # Reduce remaining cell to text, minus footnotes and other bracketed sections
+    tags = [tag for tag in cell.findAll(text=True) if not tag.startswith("[")]
+    return spaces_only("".join(tags))
 
-    # Replace all remaining whitespace with single spaces
-    cleaned = re.sub(r"\s+", " ", cleaned)
-    return cleaned
+
+def spaces_only(text):
+    """Return text with all whitespace reduced to single spaces (trimmed)."""
+    return re.sub(r"\s+", " ", text).strip()
 
 
 def new_span(text):
