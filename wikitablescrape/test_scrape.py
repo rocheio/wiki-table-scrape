@@ -7,6 +7,8 @@ import unittest
 
 from . import scrape
 
+from bs4 import BeautifulSoup
+
 
 class TestParseTables(unittest.TestCase):
     """Test parsing HTML into CSV tables using saved files."""
@@ -63,7 +65,7 @@ class TestParseTableHeader(unittest.TestCase):
 
     def assert_header_from_table(self, header, html):
         """Assert that a given header is returned from a given HTML string."""
-        table = scrape.get_tables_from_html(html)[0]
+        table = BeautifulSoup(html, "lxml").find("table")
         got = scrape.parse_table_header(table)
         self.assertEqual(got, header)
 

@@ -41,7 +41,10 @@ def scrape_tables_from_text(text, output_folder):
 def get_tables_from_html(text):
     """Return all HTML tables from Wikipedia page text."""
     soup = BeautifulSoup(text, "lxml")
-    return soup.findAll("table")
+    tables = soup.findAll("table")
+    # Exclude tables with only one row (need at least header + data)
+    tables = [tbl for tbl in tables if len(tbl.findAll("tr")) > 1]
+    return tables
 
 
 def parse_rows_from_table(table):
