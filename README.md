@@ -54,4 +54,4 @@ If you would like to contribute to this module, please open an issue or pull req
 
 If you'd like to read more about this module, please check out [my blog post][blog-post].
 
-[blog-post]: https://roche.io/2016/05/08/scrape-wikipedia-with-python
+[blog-post]: https://roche.io/2016/05/scrape-wikipedia-with-python
