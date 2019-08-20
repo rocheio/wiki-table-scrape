@@ -14,21 +14,16 @@ python3 -m venv venv
 . venv/bin/activate
 pip install -r requirements.txt
 
-# Download a page into a folder of CSV files
-python -m wikitablescrape --output-folder="/tmp/scrape" --url="https://en.wikipedia.org/wiki/List_of_mountains_by_elevation"
-
-# Inspect the output
-head /tmp/scrape/8000_metres.csv
+# Find a single HTML table and write as CSV to stdout
+python -m wikitablescrape --url="https://en.wikipedia.org/wiki/List_of_mountains_by_elevation" --header="8000 metres" | head -5
 # "Mountain","Metres","Feet","Range","Location and Notes"
 # "Mount Everest","8,848","29,029","Himalayas","Nepal/China"
 # "K2","8,611","28,251","Karakoram","Pakistan/China"
 # "Kangchenjunga","8,586","28,169","Himalayas","Nepal/India – Highest in India"
 # "Lhotse","8,516","27,940","Himalayas","Nepal/China – Climbers ascend Lhotse Face in climbing Everest"
-# "Makalu","8,485","27,838","Himalayas","Nepal/China"
-# "Cho Oyu","8,201","26,906","Himalayas","Nepal/China – Considered ""easiest"" eight-thousander"
-# "Dhaulagiri","8,167","26,795","Himalayas","Nepal – Presumed world's highest from 1808-1838"
-# "Manaslu","8,163","26,781","Himalayas","Nepal"
-# "Nanga Parbat","8,126","26,660","Himalayas","Pakistan"
+
+# Download an entire page of CSV files into a folder
+python -m wikitablescrape --url="https://en.wikipedia.org/wiki/List_of_mountains_by_elevation" --output-folder="/tmp/scrape"
 ```
 
 ## Testing
