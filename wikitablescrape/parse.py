@@ -217,7 +217,7 @@ def reverse_enum(iterable):
 
 def csv_filename(text):
     """Return a normalized filename from a table header for outputting CSV."""
-    text = text.replace(",", "")
-    text = re.sub(r"[\(|\)]", " ", text.lower())
-    text = text.replace(" - ", "-")  # Avoid `a_-_b` formatting in final output
+    text = text.lower()
+    text = re.sub(r"[,|'|\"]", "", text)
+    text = re.sub(r"[\(|\)|-]", " ", text)
     return "_".join(text.split()) + ".csv"
