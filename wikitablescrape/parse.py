@@ -18,6 +18,19 @@ class Error(Exception):
     pass
 
 
+class RowspanCounter:
+    """A decrementing counter for emitting <td rowspan="#"> bs4.Tags to many rows."""
+    def __init__(self, tag):
+        self.rows_left = int(tag["rowspan"])-1
+        del tag["rowspan"]
+        self.value = tag
+
+    def pop(self):
+        """Return the saved rowspan tag and decrement usages left."""
+        self.rows_left -= 1
+        return self.value
+
+
 class HtmlTable:
     """A <table> element parsed from HTML as a bs4.Tag."""
 
@@ -44,9 +57,9 @@ class HtmlTable:
     def parse_rows(self):
         """Yield CSV rows from a bs4.Tag Wikipedia HTML table."""
 
-        # Hold elements that span many rows in a list of
-        # dictionaries that track 'rows_left' and 'value'
-        saved_rowspans = []
+        # Track cells that span many rows
+        saved_rowspans = []  # type: list[bs4.Tag]
+
         for row in self.tag.findAll("tr"):
             cells = row.findAll(["th", "td"])
 
@@ -56,42 +69,31 @@ class HtmlTable:
                     for _ in range(int(cell["colspan"]) - 1):
                         cells.insert(index, cell)
 
-            # If the first row, use it to define width of table
             if len(saved_rowspans) == 0:
+                # Use the first row to define width of table
                 saved_rowspans = [None for _ in cells]
-            # Insert values from cells that span into this row
             elif len(cells) != len(saved_rowspans):
+                # Insert values from cells that span into this row
                 for index, rowspan_data in enumerate(saved_rowspans):
-                    if not rowspan_data:
+                    if not rowspan_data or not rowspan_data.rows_left:
                         continue
 
                     # Insert the data from previous row; decrement rows left
-                    cells.insert(index, rowspan_data["value"])
-
-                    if saved_rowspans[index]["rows_left"] == 1:
-                        saved_rowspans[index] = None
-                    else:
-                        saved_rowspans[index]["rows_left"] -= 1
+                    cells.insert(index, rowspan_data.pop())
 
             # If an element with rowspan, save it for future cells
             for index, cell in enumerate(cells):
                 if cell.has_attr("rowspan"):
-                    rows_left = int(cell["rowspan"])-1
-                    del cell["rowspan"]
-                    saved_rowspans[index] = {
-                        "rows_left": rows_left,
-                        "value": cell,
-                    }
+                    saved_rowspans[index] = RowspanCounter(cell)
 
-            if cells:
-                # Clean the table data of references and unusual whitespace
-                cleaned = [clean_cell(cell) for cell in cells]
+            # Clean the table data of references and unusual whitespace
+            cleaned = [clean_cell(cell) for cell in cells]
 
-                # Fill the row with empty values if columns are missing
-                # (Some HTML tables leave final empty cells without a <td> tag)
-                columns_missing = len(saved_rowspans) - len(cleaned)
-                if columns_missing:
-                    cleaned += [""] * columns_missing
+            # Fill the row with empty values if columns are missing
+            # (Some HTML tables leave final empty cells without a <td> tag)
+            columns_missing = len(saved_rowspans) - len(cleaned)
+            if columns_missing:
+                cleaned += [""] * columns_missing
 
             yield cleaned
 
