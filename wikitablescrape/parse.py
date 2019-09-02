@@ -62,31 +62,36 @@ class HtmlTable:
             # Insert values from cells that span into this row
             elif len(cells) != len(saved_rowspans):
                 for index, rowspan_data in enumerate(saved_rowspans):
-                    if rowspan_data is not None:
-                        # Insert the data from previous row; decrement rows left
-                        value = rowspan_data["value"]
-                        cells.insert(index, value)
+                    if not rowspan_data:
+                        continue
 
-                        if saved_rowspans[index]["rows_left"] == 1:
-                            saved_rowspans[index] = None
-                        else:
-                            saved_rowspans[index]["rows_left"] -= 1
+                    # Insert the data from previous row; decrement rows left
+                    cells.insert(index, rowspan_data["value"])
+
+                    if saved_rowspans[index]["rows_left"] == 1:
+                        saved_rowspans[index] = None
+                    else:
+                        saved_rowspans[index]["rows_left"] -= 1
 
             # If an element with rowspan, save it for future cells
             for index, cell in enumerate(cells):
                 if cell.has_attr("rowspan"):
-                    rowspan_data = {"rows_left": int(cell["rowspan"]), "value": cell}
-                    saved_rowspans[index] = rowspan_data
+                    rows_left = int(cell["rowspan"])-1
+                    del cell["rowspan"]
+                    saved_rowspans[index] = {
+                        "rows_left": rows_left,
+                        "value": cell,
+                    }
 
             if cells:
                 # Clean the table data of references and unusual whitespace
                 cleaned = [clean_cell(cell) for cell in cells]
 
-                # Fill the row with empty columns if some are missing
+                # Fill the row with empty values if columns are missing
                 # (Some HTML tables leave final empty cells without a <td> tag)
                 columns_missing = len(saved_rowspans) - len(cleaned)
                 if columns_missing:
-                    cleaned += [None] * columns_missing
+                    cleaned += [""] * columns_missing
 
             yield cleaned
 
