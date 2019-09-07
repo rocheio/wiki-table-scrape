@@ -3,4 +3,5 @@ coverage
 pip
 python-language-server
 setuptools
+twine
 wheel
