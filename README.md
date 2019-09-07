@@ -2,7 +2,7 @@
 
 Scrape HTML tables from a Wikipedia page into CSV format.
 
-The `wikitablescrape` tool can be used as a shell command or imported as a Python package.
+`wikitablescrape` can be used as a shell command or imported as a Python package.
 
 ## Why?
 
@@ -10,13 +10,17 @@ This tool makes it easy to download any Wikipedia table via CLI in a format read
 
 This is especially useful when combined with a tool like [`xsv`](https://github.com/BurntSushi/xsv).
 
+##### Year Distribution of Costliest Atlantic Hurricanes
+
 ```
-wikitablescrape --url='https://en.wikipedia.org/wiki/List_of_best-selling_music_artists' --header='250 million' | xsv select 'Release year of first charted record' | xsv stats --median | xsv select field,min,max,median,mean,stddev | xsv table
+wikitablescrape --url='https://en.wikipedia.org/wiki/List_of_costliest_Atlantic_hurricanes' --header='costliest' | xsv select "Season" | xsv stats --median | xsv select field,min,max,median,mean,stddev | xsv table
 ```
 ```
-field                                 min   max   median  mean      stddev
-Release year of first charted record  1954  2005  1969    1972.375  14.386951553404241
+field   min   max   median  mean                stddev
+Season  1965  2018  2002    1999.1228070175441  12.900523823770502
 ```
+
+##### Country / Market Distribution of Best-selling Music Artists
 
 ```
 wikitablescrape --url='https://en.wikipedia.org/wiki/List_of_best-selling_music_artists' --header='100 million' | xsv select 'Country / Market' | xsv frequency | xsv table
@@ -33,7 +37,7 @@ Country / Market  Japan                         1
 
 ## Installation
 
-You can download [PyPI](https://pypi.org/project/wikitablescrape/) using [Python 3](https://www.python.org/downloads/)
+You can download the package from [PyPI](https://pypi.org/project/wikitablescrape/) or build from source using [Python 3](https://www.python.org/downloads/).
 
 ### As a system-level Python package
 
@@ -64,22 +68,7 @@ wikitablescrape --help
 
 ## Sample Commands
 
-### Find and write a single table to stdout
-
-Highest mountains
-
-```sh
-wikitablescrape --url="https://en.wikipedia.org/wiki/List_of_mountains_by_elevation" --header="8000 metres" | head -5
-```
-```csv
-"Mountain","Metres","Feet","Range","Location and Notes"
-"Mount Everest","8,848","29,029","Himalayas","Nepal/China"
-"K2","8,611","28,251","Karakoram","Pakistan/China"
-"Kangchenjunga","8,586","28,169","Himalayas","Nepal/India – Highest in India"
-"Lhotse","8,516","27,940","Himalayas","Nepal/China – Climbers ascend Lhotse Face in climbing Everest"
-```
-
-Highest-grossing films by year (last 5 years)
+##### Write a single table to stdout
 
 ```sh
 wikitablescrape --url="https://en.wikipedia.org/wiki/List_of_highest-grossing_films" --header="films by year" | tee >(head -1) >(tail -5) >/dev/null
@@ -93,7 +82,7 @@ wikitablescrape --url="https://en.wikipedia.org/wiki/List_of_highest-grossing_fi
 "2019","Avengers: Endgame","$2,796,255,086","$356,000,000",""
 ```
 
-### Download an entire page of CSV files into a folder
+##### Download all tables on a page into a folder of CSV files
 
 ```sh
 wikitablescrape --url="https://en.wikipedia.org/wiki/Wikipedia:Multiyear_ranking_of_most_viewed_pages#Top-100_list" --output-folder="/tmp/scrape"
@@ -133,11 +122,7 @@ head -5 /tmp/scrape/cities.csv
 ## Testing
 
 ```sh
-# Run unit tests and code coverage checks
-coverage run --source wikitablescrape -m unittest discover && coverage report --fail-under=80
-
-# (Optionally) See coverage data
-coverage html && open htmlcov/index.html
+./scripts/test.sh
 ```
 
 ## Sample Articles for Scraping
@@ -151,6 +136,6 @@ If you would like to contribute to this module, please open an issue or pull req
 
 ## More Information
 
-If you'd like to read more about this module, please check out [my blog post][blog-post].
+If you'd like to read more about this module, please check out [my blog post][blog-post] from the initial release.
 
 [blog-post]: https://roche.io/2016/05/scrape-wikipedia-with-python
