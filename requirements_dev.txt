@@ -1,5 +1,6 @@
 black
 coverage
+flake8
 pip
 python-language-server
 setuptools

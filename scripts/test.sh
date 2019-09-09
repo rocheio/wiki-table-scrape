@@ -6,10 +6,15 @@ if [ ! -f venv/ ]; then
 fi
 
 . venv/bin/activate
+pip install --upgrade pip
 pip install -r requirements.txt -r requirements_dev.txt
 
-# Run unit tests and code coverage checks
-coverage run --source wikitablescrape -m unittest discover && coverage report --fail-under=80
+# Lint with flake8
+# stop the build if there are Python syntax errors or undefined names
+flake8 wikitablescrape \
+    --max-complexity=15 \
+    --max-line-length=127
 
-# Show coverage data in a browser
-coverage html && open htmlcov/index.html
+# Run unit tests and code coverage checks
+coverage run --source wikitablescrape -m unittest discover
+coverage report --fail-under=80
