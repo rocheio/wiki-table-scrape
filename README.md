@@ -123,6 +123,9 @@ head -5 /tmp/scrape/cities.csv
 
 ```sh
 ./scripts/test.sh
+
+# Show coverage data in a browser
+coverage html && open htmlcov/index.html
 ```
 
 ## Sample Articles for Scraping

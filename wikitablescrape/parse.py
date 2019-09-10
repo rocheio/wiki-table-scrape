@@ -6,7 +6,7 @@ import os
 import re
 import sys
 
-from bs4 import BeautifulSoup
+import bs4
 
 
 LOGGER = logging.getLogger(__name__)
@@ -167,7 +167,7 @@ class Parser:
 
 def get_tables_from_html(text):
     """Return all HTML tables from Wikipedia page text."""
-    soup = BeautifulSoup(text, "lxml")
+    soup = bs4.BeautifulSoup(text, "lxml")
     tables = soup.findAll("table")
     # Exclude tables with only one row (need at least header + data)
     tables = [tbl for tbl in tables if len(tbl.findAll("tr")) > 1]
@@ -214,7 +214,7 @@ def spaces_only(text):
 
 def new_span(text):
     """Return a new bs4.Tag <span> element with the given value."""
-    return BeautifulSoup(f"<span>{text}</span>", "lxml").html.body.span
+    return bs4.BeautifulSoup(f"<span>{text}</span>", "lxml").html.body.span
 
 
 def reverse_enum(iterable):
