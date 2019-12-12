@@ -163,6 +163,17 @@ class TestFindTablesByHeader(unittest.TestCase):
             self.assert_table_found("table", "", html)
 
 
+class TestCsvFilename(unittest.TestCase):
+    def test_expected_filenames(self):
+        """Table headers are translated to OS-friendly filenames."""
+        testcases = [
+            ("General", "general.csv"),
+            ("API / editor features", "api_editor_features.csv"),
+        ]
+        for header, expected in testcases:
+            self.assertEqual(expected, parse.csv_filename(header))
+
+
 def text_html_table(caption=None):
     """Return a text HtmlTable with a given caption for testing."""
     if caption:

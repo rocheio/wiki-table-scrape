@@ -8,7 +8,7 @@ with open('requirements.txt') as f:
 
 setuptools.setup(
     name="wikitablescrape",
-    version="1.0.2",
+    version="1.0.3",
     author="Andy Roche",
     author_email="andy@roche.io",
     description="Scrape HTML tables from a Wikipedia page into CSV format.",
