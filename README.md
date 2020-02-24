@@ -89,34 +89,36 @@ wikitablescrape --url="https://en.wikipedia.org/wiki/Wikipedia:Multiyear_ranking
 ```
 ```
 Parsing all tables from 'https://en.wikipedia.org/wiki/Wikipedia:Multiyear_ranking_of_most_viewed_pages#Top-100_list' into '/tmp/scrape'
-Writing table 1 to /tmp/scrape/top_100_list.csv
-Writing table 2 to /tmp/scrape/countries.csv
-Writing table 3 to /tmp/scrape/cities.csv
-Writing table 4 to /tmp/scrape/people.csv
-Writing table 5 to /tmp/scrape/people_singers.csv
-Writing table 6 to /tmp/scrape/people_actors.csv
-Writing table 7 to /tmp/scrape/people_athletes.csv
-Writing table 8 to /tmp/scrape/people_modern_political_leaders.csv
-Writing table 9 to /tmp/scrape/people_pre_modern_people.csv
-Writing table 10 to /tmp/scrape/people_3rd_millennium_people.csv
-Writing table 11 to /tmp/scrape/progression_of_the_most_viewed_millennial_persons_on_wikipedia.csv
-Writing table 12 to /tmp/scrape/music_bands_historical_most_viewed_3rd_millennium_persons.csv
-Writing table 13 to /tmp/scrape/sport_teams_historical_most_viewed_3rd_millennium_persons.csv
-Writing table 14 to /tmp/scrape/films_and_tv_series_historical_most_viewed_3rd_millennium_persons.csv
-Writing table 15 to /tmp/scrape/albums_historical_most_viewed_3rd_millennium_persons.csv
-Writing table 16 to /tmp/scrape/books_and_book_series_historical_most_viewed_3rd_millennium_persons.csv
-Writing table 17 to /tmp/scrape/books_and_book_series_pre_modern_books_and_texts.csv
+Writing table 1 to /tmp/scrape/table_1_top_100_list.csv
+Writing table 2 to /tmp/scrape/table_2_countries.csv
+Writing table 3 to /tmp/scrape/table_3_cities.csv
+Writing table 4 to /tmp/scrape/table_4_buildings_&_structures_&_statues.csv
+Writing table 5 to /tmp/scrape/table_5_people.csv
+Writing table 6 to /tmp/scrape/table_6_people_singers.csv
+Writing table 7 to /tmp/scrape/table_7_people_actors.csv
+Writing table 8 to /tmp/scrape/table_8_people_romantic_actors.csv
+Writing table 9 to /tmp/scrape/table_9_people_athletes.csv
+Writing table 10 to /tmp/scrape/table_10_people_modern_political_leaders.csv
+Writing table 11 to /tmp/scrape/table_11_people_pre_modern_people.csv
+Writing table 12 to /tmp/scrape/table_12_people_3rd_millennium_people.csv
+Writing table 13 to /tmp/scrape/table_13_progression_of_the_most_viewed_millennial_persons_on_wikipedia.csv
+Writing table 14 to /tmp/scrape/table_14_music_bands_historical_most_viewed_3rd_millennium_persons.csv
+Writing table 15 to /tmp/scrape/table_15_sport_teams_historical_most_viewed_3rd_millennium_persons.csv
+Writing table 16 to /tmp/scrape/table_16_films_and_tv_series_historical_most_viewed_3rd_millennium_persons.csv
+Writing table 17 to /tmp/scrape/table_17_albums_historical_most_viewed_3rd_millennium_persons.csv
+Writing table 18 to /tmp/scrape/table_18_books_and_book_series_historical_most_viewed_3rd_millennium_persons.csv
+Writing table 19 to /tmp/scrape/table_19_books_and_book_series_pre_modern_books_and_texts.csv
 ```
 
 ```sh
-head -5 /tmp/scrape/cities.csv
+head -5 /tmp/scrape/table_3_cities.csv
 ```
 ```csv
 "Rank","Page","Continent","Views in millions"
-"1","New York City","North America","69"
-"2","London","Europe","57"
-"2","Singapore","Asia","57"
-"*","Angelsberg","Europe","44"
+"1","New York City","North America","75"
+"2","Singapore","Asia","63"
+"3","London","Europe","61"
+"4","Hong Kong","Asia","50"
 ```
 
 ## Testing

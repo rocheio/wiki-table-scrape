@@ -11,6 +11,8 @@ import bs4
 
 LOGGER = logging.getLogger(__name__)
 
+MAX_FILENAME_LEN = os.getenv("MAX_FILENAME_LEN", 250)
+
 
 class Error(Exception):
     """Base class for all errors emitted by the parse package."""
@@ -20,8 +22,9 @@ class Error(Exception):
 
 class RowspanCounter:
     """A decrementing counter for emitting <td rowspan="#"> bs4.Tags to many rows."""
+
     def __init__(self, tag):
-        self.rows_left = int(tag["rowspan"])-1
+        self.rows_left = int(tag["rowspan"]) - 1
         del tag["rowspan"]
         self.value = tag
 
@@ -120,8 +123,11 @@ class Parser:
         os.makedirs(dir, exist_ok=True)
 
         for index, table in enumerate(self.tables):
-            header = table.parse_header() or f"table_{index+1}"
-            filepath = os.path.join(dir, csv_filename(header))
+            filename = f"table_{index+1}"
+            header = table.parse_header()
+            if header:
+                filename += "_" + header
+            filepath = os.path.join(dir, csv_filename(filename))
 
             LOGGER.info(f"Writing table {index+1} to {filepath}")
             table.write_to_file(filepath)
@@ -227,4 +233,7 @@ def csv_filename(text):
     text = text.lower()
     text = re.sub(r"[,|'|\"/]", "", text)
     text = re.sub(r"[\(|\)|-]", " ", text)
-    return "_".join(text.split()) + ".csv"
+    joined = "_".join(text.split())
+    if len(joined) > MAX_FILENAME_LEN:
+        joined = joined[: joined.rindex("_", 0, MAX_FILENAME_LEN)]
+    return joined + ".csv"

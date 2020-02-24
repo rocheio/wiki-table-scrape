@@ -60,13 +60,13 @@ class TestParseTables(unittest.TestCase):
                 parser = parse.Parser(htmlfile.read())
             parser.write_to_dir(tmpdir)
             want = [
-                "1000_metres.csv",
-                "2000_metres.csv",
-                "3000_metres.csv",
-                "4000_metres.csv",
-                "5000_metres.csv",
-                "6000_metres.csv",
-                "from_its_base_on_the_ocean_floor.csv",
+                "table_1_6000_metres.csv",
+                "table_2_5000_metres.csv",
+                "table_3_4000_metres.csv",
+                "table_4_3000_metres.csv",
+                "table_5_2000_metres.csv",
+                "table_6_1000_metres.csv",
+                "table_7_from_its_base_on_the_ocean_floor.csv",
             ]
             got = sorted(os.listdir(tmpdir))
             self.assertEqual(got, want)
@@ -172,6 +172,11 @@ class TestCsvFilename(unittest.TestCase):
         ]
         for header, expected in testcases:
             self.assertEqual(expected, parse.csv_filename(header))
+
+    def test_filename_too_long(self):
+        header = "List of Super Bowl television ratings in the United States with average viewers, total viewers, average households, household rating and share, 18–49 rating and share and average cost of 30-second ad, showing the period they were measured between, Super Bowl, date and network aired on"  # noqa: E501
+        want = "list_of_super_bowl_television_ratings_in_the_united_states_with_average_viewers_total_viewers_average_households_household_rating_and_share_18–49_rating_and_share_and_average_cost_of_30_second_ad_showing_the_period_they_were_measured_between_super.csv"  # noqa: E501
+        self.assertEqual(want, parse.csv_filename(header))
 
 
 def text_html_table(caption=None):
