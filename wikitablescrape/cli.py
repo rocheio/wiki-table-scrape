@@ -3,7 +3,7 @@ import logging
 
 import requests
 
-from .parse import Parser, LOGGER
+from .parse import Parser, LOGGER, DEFAULT_NEWLINE_REPLACE
 
 
 def main():
@@ -17,6 +17,11 @@ def main():
     cli.add_argument("--url", help="URL of the Wikipedia page to scrape", required=True)
     cli.add_argument("--output-folder", help="Folder to write all tables from a url")
     cli.add_argument("--header", help="Write a single HTML table by header to stdout")
+    cli.add_argument(
+        "--newline-replace",
+        help="Value to replace HTML breaklines (<br>)",
+        default=DEFAULT_NEWLINE_REPLACE,
+    )
 
     args = cli.parse_args()
 
@@ -26,7 +31,7 @@ def main():
     resp = requests.get(args.url)
     resp.raise_for_status()
 
-    parser = Parser(resp.text)
+    parser = Parser(resp.text, args.newline_replace)
 
     if args.output_folder:
         LOGGER.info(f"Parsing all tables from '{args.url}' into '{args.output_folder}'")
