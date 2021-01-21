@@ -12,6 +12,7 @@ import bs4
 LOGGER = logging.getLogger(__name__)
 
 MAX_FILENAME_LEN = os.getenv("MAX_FILENAME_LEN", 250)
+DEFAULT_NEWLINE_REPLACE = " "
 
 
 class Error(Exception):
@@ -37,22 +38,23 @@ class RowspanCounter:
 class HtmlTable:
     """A <table> element parsed from HTML as a bs4.Tag."""
 
-    def __init__(self, tag):
+    def __init__(self, tag, newline_replace=DEFAULT_NEWLINE_REPLACE):
         self.tag = tag
+        self.newline_replace = newline_replace
 
     def parse_header(self):
         """Return the best title for an HTML table, or None if not found."""
         caption = self.tag.find("caption")
         if caption:
-            return clean_cell(caption)
+            return clean_cell(caption, self.newline_replace)
 
         h2 = self.tag.findPrevious("h2")
         if h2:
-            header = clean_cell(h2)
+            header = clean_cell(h2, self.newline_replace)
             # Try to find a subheader as well
             h3 = self.tag.findPrevious("h3")
             if h3:
-                header += f" - {clean_cell(h3)}"
+                header += f" - {clean_cell(h3, self.newline_replace)}"
             return header
 
         return None
@@ -90,7 +92,7 @@ class HtmlTable:
                     saved_rowspans[index] = RowspanCounter(cell)
 
             # Clean the table data of references and unusual whitespace
-            cleaned = [clean_cell(cell) for cell in cells]
+            cleaned = [clean_cell(cell, self.newline_replace) for cell in cells]
 
             # Fill the row with empty values if columns are missing
             # (Some HTML tables leave final empty cells without a <td> tag)
@@ -115,8 +117,10 @@ class HtmlTable:
 class Parser:
     """Parses HtmlTables from text for writing output as CSV."""
 
-    def __init__(self, text):
-        self.tables = [HtmlTable(tag) for tag in get_tables_from_html(text)]
+    def __init__(self, text, newline_replace=DEFAULT_NEWLINE_REPLACE):
+        self.tables = [
+            HtmlTable(tag, newline_replace) for tag in get_tables_from_html(text)
+        ]
 
     def write_to_dir(self, dir):
         """Write HtmlTables into a directory of CSV files."""
@@ -180,7 +184,7 @@ def get_tables_from_html(text):
     return tables
 
 
-def clean_cell(cell):
+def clean_cell(cell, newline_replace):
     """Yield clean string value from a bs4.Tag from Wikipedia."""
 
     to_remove = (
@@ -201,7 +205,7 @@ def clean_cell(cell):
     linebreaks = cell.findAll("br")
     if linebreaks:
         for linebreak in linebreaks:
-            linebreak.replace_with(new_span(" "))
+            linebreak.replace_with(new_span(newline_replace))
 
     # If cell is only a single image, use its alt-text
     tags = cell.findAll()

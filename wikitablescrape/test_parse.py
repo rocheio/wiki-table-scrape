@@ -11,11 +11,11 @@ from . import parse
 
 
 class TestParseTables(unittest.TestCase):
-    def assert_html_to_csv(self, testin, testout):
+    def assert_html_to_csv(self, testin, testout, **kw):
         """Assert that an HTML input file becomes a CSV output file."""
         with open(testin, "r") as htmlfile:
             tag = parse.get_tables_from_html(htmlfile.read())[0]
-            got = parse.HtmlTable(tag).parse_rows()
+            got = parse.HtmlTable(tag, **kw).parse_rows()
 
         with open(testout, "r") as csvfile:
             want = list(csv.reader(csvfile))
@@ -39,6 +39,15 @@ class TestParseTables(unittest.TestCase):
         """HTML `<br />` elements are parsed out and replaced with spaces."""
         self.assert_html_to_csv(
             "testdata/linebreaks/input.html", "testdata/linebreaks/output.csv"
+        )
+
+    def test_parse_linebreaks_with_newline_separate(self):
+        """HTML `<br />` elements are parsed out and replaced with
+        custom `newline-separate` option."""
+        self.assert_html_to_csv(
+            "testdata/linebreaks/input_with_newline_separate.html",
+            "testdata/linebreaks/output_with_newline_separate.csv",
+            newline_replace="\\n",
         )
 
     def test_quotes_and_smalls(self):
